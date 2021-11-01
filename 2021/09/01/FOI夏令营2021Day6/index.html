@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="网络流 二分图  设图\(G&#x3D;(V,E)\)是一个无向图，如果顶点\(V\)可分割为两个互不相交的子集\((A,B)\)，并且途中的每条边\((i,j)\)所关联的两个顶点\(i\)和\(j\)分别属于这两个不同的顶点集，则称图\(G\)为一个二分图。  二分图染色  用来判断二分图  二分图匹配  匈牙利算法  二分图最大权匹配  KM算法  网络流  容量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FOI夏令营2021Day6">
+<meta property="og:url" content="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day6/index.html">
+<meta property="og:site_name" content="Phaero">
+<meta property="og:description" content="网络流 二分图  设图\(G&#x3D;(V,E)\)是一个无向图，如果顶点\(V\)可分割为两个互不相交的子集\((A,B)\)，并且途中的每条边\((i,j)\)所关联的两个顶点\(i\)和\(j\)分别属于这两个不同的顶点集，则称图\(G\)为一个二分图。  二分图染色  用来判断二分图  二分图匹配  匈牙利算法  二分图最大权匹配  KM算法  网络流  容量">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-01T04:00:04.000Z">
+<meta property="article:modified_time" content="2021-11-01T04:23:39.541Z">
+<meta property="article:tag" content="OI">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>FOI夏令营2021Day6 | Phaero</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Phaero" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Phaero</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phaero">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FOI夏令营2021Day6
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-01 12:00:04" itemprop="dateCreated datePublished" datetime="2021-09-01T12:00:04+08:00">2021-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-01 12:23:39" itemprop="dateModified" datetime="2021-11-01T12:23:39+08:00">2021-11-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="网络流">网络流</h1>
+<h2 id="二分图">二分图</h2>
+<ul>
+<li>设图<span class="math inline">\(G=(V,E)\)</span>是一个无向图，如果顶点<span class="math inline">\(V\)</span>可分割为两个互不相交的子集<span class="math inline">\((A,B)\)</span>，并且途中的每条边<span class="math inline">\((i,j)\)</span>所关联的两个顶点<span class="math inline">\(i\)</span>和<span class="math inline">\(j\)</span>分别属于这两个不同的顶点集，则称图<span class="math inline">\(G\)</span>为一个二分图。</li>
+</ul>
+<h3 id="二分图染色">二分图染色</h3>
+<ul>
+<li>用来判断二分图</li>
+</ul>
+<h3 id="二分图匹配">二分图匹配</h3>
+<ul>
+<li>匈牙利算法</li>
+</ul>
+<h3 id="二分图最大权匹配">二分图最大权匹配</h3>
+<ul>
+<li>KM算法</li>
+</ul>
+<h2 id="网络流-1">网络流</h2>
+<ul>
+<li>容量网路是一个有向图，图的边<span class="math inline">\((u,v)\)</span>有非负的权<span class="math inline">\(c(u,v)\)</span>，被称为容量。</li>
+<li>图中有一个称为源的节点和一个称为汇的节点。</li>
+<li>实际通过每条边的流量被称为<span class="math inline">\(f(u,v)\)</span></li>
+<li>参量网络是一个结构和容量网络相同的有向图，只不过每条边的边权的权值为<span class="math inline">\(c(u,v)-f(u,v)\)</span></li>
+<li>一个合法网络流被称为可行流，应该满足：
+<ul>
+<li>容量限制：<span class="math inline">\(0\leq f(u,v) \leq c(u,v)\)</span></li>
+<li>斜对称性：对于非源汇节点<span class="math inline">\(u\)</span>，有<span class="math inline">\(f(u,v)=-f(v,u)\)</span></li>
+</ul></li>
+</ul>
+<h3 id="最大流">最大流</h3>
+<ul>
+<li>设图<span class="math inline">\(G=(V,E)\)</span>是一个有向图，每条边上有流量限制，求从源点<span class="math inline">\(S\)</span>到汇点<span class="math inline">\(T\)</span>的最大流量，这就是最大流问题。</li>
+<li>EK算法
+<ul>
+<li>每次在残量网络上找到一条增广路，然后再这条路上每条边的边权减去路上最小的边权，然后建反向边。</li>
+</ul></li>
+<li>Dinic算法
+<ul>
+<li>主要步骤：循环增广，每次增广后再次进行BFS分层，直到<span class="math inline">\(S\)</span>与<span class="math inline">\(T\)</span>不连通。</li>
+<li>层次网络：为了避免走太长的路径浪费时间，Dinic算法每次增广前都对残量网络进行了一个标号，形成一个层次网络。从<span class="math inline">\(S\)</span>开始进行BFS，将距离<span class="math inline">\(S\)</span>距离为<span class="math inline">\(k\)</span>的标记<span class="math inline">\(k\)</span>，这样就可以形成残量网络。</li>
+<li>增广：
+<ul>
+<li>在增广的时候，只走<span class="math inline">\(level_u=level_{u+1}+1\)</span>的边，满足这个等式的边成为允许弧。</li>
+<li>增广的过程就是从<span class="math inline">\(S\)</span>开始跑DFS，只允许走允许弧。再DFS到一个节点<span class="math inline">\(u\)</span>时再额外传入一个参数<span class="math inline">\(rest\)</span>，表示从<span class="math inline">\(s\)</span>到这里最多能流入的流量，DFS返回实际使用的流量。</li>
+<li>然后从<span class="math inline">\(u\)</span>开始，通过允许弧往下，传给下一个节点的<span class="math inline">\(rest\)</span>就是当前<span class="math inline">\(rest\)</span>和残量中较小的哪一个，然后<span class="math inline">\(rest\)</span>减去<span class="math inline">\(DFS\)</span>的返回值。</li>
+<li>再找下一条允许弧继续DFS，直到<span class="math inline">\(rest=0\)</span></li>
+<li>DFS的终点就是遇到<span class="math inline">\(T\)</span>的时候，这时直接返回<span class="math inline">\(rest\)</span>。</li>
+</ul></li>
+<li>当前弧优化：每次增广时，对于一个点，它前面尝试增广所用的弧可以不用再跑一遍。</li>
+</ul></li>
+</ul>
+<h3 id="最小割">最小割</h3>
+<ul>
+<li>一个网络的割是一个边集，如果把这个集合的边删去，这个网络就不再联通。</li>
+<li>最大流最小割定理：对于一个网络流，其最大流的流量等于其最小割的流量。</li>
+</ul>
+<h3 id="费用流">费用流</h3>
+<ul>
+<li>最小费用最大流，流量网络中每条边都有单位流量的费用，求在运输量最大的情况下，花费的最小费用。
+<ul>
+<li>EK算法</li>
+<li>zkw费用流（Dinic改）
+<ul>
+<li>再BFS是找最短路进行分层。</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="线性规划">线性规划</h2>
+<ul>
+<li>线性约束+变量+目标函数最大/小化</li>
+</ul>
+<h3 id="网络流问题的线性规划模型">网络流问题的线性规划模型</h3>
+<ul>
+<li>对偶问题</li>
+<li>平面图最小割</li>
+</ul>
+<hr />
+<h4 id="例题1poj1459-power-network">例题1：poj1459 Power Network</h4>
+<ul>
+<li>一个电力网络由节点（电站、消费者或中转站）和输电线组成。</li>
+<li>一个电站可以生产一些点，一个消费者可以消耗一些点，中转站用来传递电力。</li>
+<li>每条输电线单位时间能够传输的电力是无限的。</li>
+<li>你需要计算单位时间内这个店里网络能够支撑多少电力消耗。</li>
+<li>建立超级源点、超级汇点，源点向电站连容量无限大的边，汇点向消费者连容量无限大的边，跑最大流。</li>
+</ul>
+<h4 id="例题2poj1149-pigs">例题2：poj1149 PIGS</h4>
+<ul>
+<li>有<span class="math inline">\(m\)</span>个猪圈，每个猪圈开始有若干头猪，一开始每个猪圈都是关闭的。</li>
+<li>依次来了<span class="math inline">\(n\)</span>个顾客，每个顾客分别打开一些猪圈，然后买了一些猪。每个顾客能够买的著有一个上线。在每个顾客走后，打开的猪圈里的猪可以任意交换，之后所有猪圈关闭。</li>
+<li>问总共可以买出多少只猪。</li>
+<li><span class="math inline">\(1\leq n\leq 100,1\leq m\leq 1000\)</span></li>
+</ul>
+<h4 id="例题3poj2713-matrix1">例题3：poj2713 Matrix1</h4>
+<ul>
+<li>有一个<span class="math inline">\(n\times m\)</span>的网格，每个格子有价值<span class="math inline">\(c_{i,j}\)</span>的宝石。</li>
+<li>问最多能够取价值多少的宝石，使得任意两块宝石不相邻。</li>
+<li>其中<span class="math inline">\(1\leq n,m\leq 50,0\leq c_{i,j}\leq 40000\)</span></li>
+</ul>
+<h4 id="例题4bzoj1101-狼抓兔子">例题4：bzoj1101 狼抓兔子</h4>
+<p>题意略。</p>
+<h4 id="例题5k取方格数">例题5：k取方格数</h4>
+<ul>
+<li>有一个<span class="math inline">\(n\times n\)</span>的放个图，方格中有正整数。从左上角开始走到右下角，只能向右或者向下走，走的过程中取出方格的数（取出后方格数字变为<span class="math inline">\(0\)</span>）。</li>
+<li>一共可以走<span class="math inline">\(k\)</span>次，你需要求出最多能够得到多少的数。</li>
+<li><span class="math inline">\(n\leq 50,k\leq 10\)</span></li>
+<li>拆点，跑最大费用最大流</li>
+</ul>
+<h4 id="dag最小路径覆盖">dag最小路径覆盖</h4>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day5/" rel="prev" title="FOI夏令营2021Day5">
+      <i class="fa fa-chevron-left"></i> FOI夏令营2021Day5
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day7/" rel="next" title="FOI夏令营2021Day7">
+      FOI夏令营2021Day7 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%B5%81"><span class="nav-number">1.</span> <span class="nav-text">网络流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE"><span class="nav-number">1.1.</span> <span class="nav-text">二分图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9F%93%E8%89%B2"><span class="nav-number">1.1.1.</span> <span class="nav-text">二分图染色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D"><span class="nav-number">1.1.2.</span> <span class="nav-text">二分图匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E6%9D%83%E5%8C%B9%E9%85%8D"><span class="nav-number">1.1.3.</span> <span class="nav-text">二分图最大权匹配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%B5%81-1"><span class="nav-number">1.2.</span> <span class="nav-text">网络流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E6%B5%81"><span class="nav-number">1.2.1.</span> <span class="nav-text">最大流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%89%B2"><span class="nav-number">1.2.2.</span> <span class="nav-text">最小割</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%B9%E7%94%A8%E6%B5%81"><span class="nav-number">1.2.3.</span> <span class="nav-text">费用流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92"><span class="nav-number">1.3.</span> <span class="nav-text">线性规划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%B5%81%E9%97%AE%E9%A2%98%E7%9A%84%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">网络流问题的线性规划模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981poj1459-power-network"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">例题1：poj1459 Power Network</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%982poj1149-pigs"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">例题2：poj1149 PIGS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%983poj2713-matrix1"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">例题3：poj2713 Matrix1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%984bzoj1101-%E7%8B%BC%E6%8A%93%E5%85%94%E5%AD%90"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">例题4：bzoj1101 狼抓兔子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%985k%E5%8F%96%E6%96%B9%E6%A0%BC%E6%95%B0"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">例题5：k取方格数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dag%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96"><span class="nav-number">1.3.1.6.</span> <span class="nav-text">dag最小路径覆盖</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="DP DP模型 树形DP 例题  树上带权最大独立集。（一棵树，每一个点有权值\(v_i\)，求一个独立集使得独立集中的点权和最大）。 令\(f_{i,0&#x2F;1}\)表示只考虑  例题  树上带权最大独立集且独立集大小不能超过\(m\)（树上背包）。  区间DP 例题：合并石子  略。  状压DP 例题：旅行商问题  给定一张带权无向完全图，求路径长度最小的哈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FOI夏令营2021Day4">
+<meta property="og:url" content="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day4/index.html">
+<meta property="og:site_name" content="Phaero">
+<meta property="og:description" content="DP DP模型 树形DP 例题  树上带权最大独立集。（一棵树，每一个点有权值\(v_i\)，求一个独立集使得独立集中的点权和最大）。 令\(f_{i,0&#x2F;1}\)表示只考虑  例题  树上带权最大独立集且独立集大小不能超过\(m\)（树上背包）。  区间DP 例题：合并石子  略。  状压DP 例题：旅行商问题  给定一张带权无向完全图，求路径长度最小的哈">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-01T04:00:02.000Z">
+<meta property="article:modified_time" content="2021-11-01T04:22:07.736Z">
+<meta property="article:tag" content="OI">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>FOI夏令营2021Day4 | Phaero</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Phaero" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Phaero</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phaero">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FOI夏令营2021Day4
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-01 12:00:02" itemprop="dateCreated datePublished" datetime="2021-09-01T12:00:02+08:00">2021-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-01 12:22:07" itemprop="dateModified" datetime="2021-11-01T12:22:07+08:00">2021-11-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="dp">DP</h1>
+<h2 id="dp模型">DP模型</h2>
+<h3 id="树形dp">树形DP</h3>
+<h4 id="例题">例题</h4>
+<ul>
+<li>树上带权最大独立集。（一棵树，每一个点有权值<span class="math inline">\(v_i\)</span>，求一个独立集使得独立集中的点权和最大）。</li>
+<li>令<span class="math inline">\(f_{i,0/1}\)</span>表示只考虑</li>
+</ul>
+<h4 id="例题-1">例题</h4>
+<ul>
+<li>树上带权最大独立集且独立集大小不能超过<span class="math inline">\(m\)</span>（树上背包）。</li>
+</ul>
+<h3 id="区间dp">区间DP</h3>
+<h4 id="例题合并石子">例题：合并石子</h4>
+<ul>
+<li>略。</li>
+</ul>
+<h3 id="状压dp">状压DP</h3>
+<h4 id="例题旅行商问题">例题：旅行商问题</h4>
+<ul>
+<li>给定一张带权无向完全图，求路径长度最小的哈密顿回路。 #### 例题：图的色数</li>
+<li>给定一张无向图，将每个点染上一种颜色使得相邻点颜色不相同，求最少需要几种颜色。</li>
+</ul>
+<h3 id="概率期望dp">概率期望DP</h3>
+<h4 id="例题-2">例题</h4>
+<ul>
+<li>有<span class="math inline">\(n\)</span>个球，每次随机抽出一个球后放回，问期望多少次才能抽数每个球至少一次。</li>
+</ul>
+<h4 id="例题-3">例题</h4>
+<ul>
+<li>给定一张有向无环简单图，初始在点<span class="math inline">\(1\)</span>，每次操作等概率随机一条出边移动直到移动到没有出边的点为止，问停留在每个点的概率。</li>
+</ul>
+<h4 id="例题-4">例题</h4>
+<ul>
+<li>给定一张无向简单图，初始在点<span class="math inline">\(1\)</span>，每次操作等概率随机一条出边移动直到移动到点<span class="math inline">\(n\)</span>为止，问移动到每个点的期望次数。</li>
+</ul>
+<h3 id="数位dp">数位DP</h3>
+<h4 id="例题-5">例题</h4>
+<ul>
+<li>求<span class="math inline">\(1\)</span>到<span class="math inline">\(n\)</span>中满足含有子串"<span class="math inline">\(13\)</span>"且能被<span class="math inline">\(13\)</span>整除的数的个数。</li>
+</ul>
+<h2 id="数据结构优化dp">数据结构优化DP</h2>
+<h4 id="例题最长上升子序列">例题：最长上升子序列</h4>
+<ul>
+<li>树状数组，二维偏序。</li>
+</ul>
+<hr />
+<h4 id="例题1-agc049d-convex-sequence">例题1 agc049d Convex Sequence</h4>
+<ul>
+<li>求满足以下条件的长度为<span class="math inline">\(n\)</span>的非负整数序列<span class="math inline">\(A\)</span>的个数，对<span class="math inline">\(10^9+7\)</span>取模：</li>
+<li><span class="math inline">\(1.\,sum^n_{i=1}A_i=m\)</span></li>
+<li><span class="math inline">\(2.\,\forall2\leq i\leq n-1,2A_i\leq A_{i-1} + A_{i+1}\)</span></li>
+<li><span class="math inline">\(1\leq n,m\leq 10^5\)</span></li>
+</ul>
+<h4 id="例题2-agc022e-median-replace">例题2 agc022e Median Replace</h4>
+<ul>
+<li>定义一个长度为奇数<span class="math inline">\(n\)</span>的<span class="math inline">\(01\)</span>串是美丽的，当且仅当每次将连续三个位替换为它们的中位数<span class="math inline">\({\dfrac{n-1}{2}}\)</span>次，这个船变成一个字符<span class="math inline">\(1\)</span>。</li>
+<li>给定一个有<span class="math inline">\(0,1\)</span>和<span class="math inline">\(?\)</span>组成的字符串<span class="math inline">\(S\)</span>，求将问号替换为<span class="math inline">\(0\)</span>和<span class="math inline">\(1\)</span>后，得到一个美丽的字符串的方案数</li>
+<li>答案对<span class="math inline">\(10^9+7\)</span>取模</li>
+<li><span class="math inline">\(n\leq3\times10^5\)</span></li>
+</ul>
+<h4 id="例题3-cf585f-digits-of-number-pi">例题3 CF585F Digits of Number Pi</h4>
+<ul>
+<li>给定一个数字串<span class="math inline">\(s\)</span>，可能存在前导零</li>
+<li>定义一个长度为<span class="math inline">\(d\)</span>的数字串<span class="math inline">\(t\)</span>是“半出现的”，当且仅当存在一个长度至少为<span class="math inline">\(\lfloor\dfrac{d}{2}\rfloor\)</span>的<span class="math inline">\(s\)</span>和<span class="math inline">\(t\)</span>的公共子串</li>
+<li>给定两个无前导零的<span class="math inline">\(d\)</span>位的数字<span class="math inline">\(x,y\)</span>，问<span class="math inline">\([x,y]\)</span>中所有的整数所代表的数字串中，有多少个是“半出现的”。</li>
+<li>答案对<span class="math inline">\(10^9+7\)</span>取模</li>
+<li><span class="math inline">\(1\leq |s|\leq 1000,2\leq d\leq 50,x\leq y\)</span></li>
+</ul>
+<h4 id="例题4-arc108e-random-is">例题4 arc108e Random IS</h4>
+<ul>
+<li>给定一个长度为<span class="math inline">\(n\)</span>的排列<span class="math inline">\(a\)</span>，定义一个排列时合法的当且仅当标记的数满足单调递增。</li>
+<li>每次等概率选择一个未标记过且标记后序列合法的数标记，无法标记时结束，求期望的标记次数</li>
+<li>对<span class="math inline">\(10^9+7\)</span>取模。</li>
+<li><span class="math inline">\(n\leq 2000\)</span></li>
+</ul>
+<h4 id="例题5-agc046d-secret-passage">例题5 agc046d Secret Passage</h4>
+<ul>
+<li>给定一个仅包含<span class="math inline">\(0\)</span>和<span class="math inline">\(1\)</span>的字符串<span class="math inline">\(S\)</span>，求进行如下操作若干次后，能得到多少种不同的字符串：</li>
+<li>删去<span class="math inline">\(S\)</span>中的前两个字符的其中一个，将另一个移动至<span class="math inline">\(S\)</span>的任意位置。</li>
+<li>对<span class="math inline">\(998244353\)</span>取模</li>
+<li><span class="math inline">\(1\leq |S|\leq 300\)</span></li>
+</ul>
+<h4 id="例题6-agc045c-range-set">例题6 agc045c Range Set</h4>
+<ul>
+<li>给定一个长度为<span class="math inline">\(n\)</span>的<span class="math inline">\(01\)</span>串，初始时全为<span class="math inline">\(0\)</span>。</li>
+<li>以任意顺序进行若干次以下两种操作，求能得到多少种不同的字符串，对<span class="math inline">\(10^9+7\)</span>取模：</li>
+<li><span class="math inline">\(1.\,\)</span>选择连续<span class="math inline">\(A\)</span>个字符，将它们都变成<span class="math inline">\(0\)</span>。</li>
+<li><span class="math inline">\(2.\,\)</span>选择连续<span class="math inline">\(B\)</span>个字符，将它们都变成<span class="math inline">\(1\)</span>。</li>
+<li><span class="math inline">\(n\leq 5000\)</span></li>
+</ul>
+<h4 id="例题7-nomura2020f-sorting-game">例题7 nomura2020f Sorting Game</h4>
+<ul>
+<li>有一个长度为<span class="math inline">\(m\)</span>的序列<span class="math inline">\(a\)</span>，值域为<span class="math inline">\([0,2^n-1]\)</span>。</li>
+<li>Snuke先进行以下操作任意次：</li>
+<li>选择一个数<span class="math inline">\(d\)</span>，将序列<span class="math inline">\(a\)</span>中的所有数的二进制下第<span class="math inline">\(d\)</span>位变成<span class="math inline">\(0\)</span>。</li>
+<li>接着Takahashi想通过若干次交换，将序列<span class="math inline">\(a\)</span>变为单调不降的序列，但每次交换只能交换相邻的两个数，并且这两个数二进制下只能有一位不同。</li>
+<li>问在所有<span class="math inline">\(2^{mn}\)</span>个序列<span class="math inline">\(a\)</span>中，有多少个序列<span class="math inline">\(a\)</span>满足Takahashi能实现他的目标。</li>
+<li>对<span class="math inline">\(10^9+7\)</span>取模</li>
+<li><span class="math inline">\(n,m\leq 5000\)</span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day3/" rel="prev" title="FOI夏令营2021Day3">
+      <i class="fa fa-chevron-left"></i> FOI夏令营2021Day3
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day5/" rel="next" title="FOI夏令营2021Day5">
+      FOI夏令营2021Day5 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dp"><span class="nav-number">1.</span> <span class="nav-text">DP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dp%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">DP模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E5%BD%A2dp"><span class="nav-number">1.1.1.</span> <span class="nav-text">树形DP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">例题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98-1"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">例题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4dp"><span class="nav-number">1.1.2.</span> <span class="nav-text">区间DP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E5%90%88%E5%B9%B6%E7%9F%B3%E5%AD%90"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">例题：合并石子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E5%8E%8Bdp"><span class="nav-number">1.1.3.</span> <span class="nav-text">状压DP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E6%97%85%E8%A1%8C%E5%95%86%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">例题：旅行商问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9Bdp"><span class="nav-number">1.1.4.</span> <span class="nav-text">概率期望DP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98-2"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">例题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98-3"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">例题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98-4"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">例题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E4%BD%8Ddp"><span class="nav-number">1.1.5.</span> <span class="nav-text">数位DP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98-5"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">例题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96dp"><span class="nav-number">1.2.</span> <span class="nav-text">数据结构优化DP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">例题：最长上升子序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981-agc049d-convex-sequence"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">例题1 agc049d Convex Sequence</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%982-agc022e-median-replace"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">例题2 agc022e Median Replace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%983-cf585f-digits-of-number-pi"><span class="nav-number">1.2.0.4.</span> <span class="nav-text">例题3 CF585F Digits of Number Pi</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%984-arc108e-random-is"><span class="nav-number">1.2.0.5.</span> <span class="nav-text">例题4 arc108e Random IS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%985-agc046d-secret-passage"><span class="nav-number">1.2.0.6.</span> <span class="nav-text">例题5 agc046d Secret Passage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%986-agc045c-range-set"><span class="nav-number">1.2.0.7.</span> <span class="nav-text">例题6 agc045c Range Set</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%987-nomura2020f-sorting-game"><span class="nav-number">1.2.0.8.</span> <span class="nav-text">例题7 nomura2020f Sorting Game</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

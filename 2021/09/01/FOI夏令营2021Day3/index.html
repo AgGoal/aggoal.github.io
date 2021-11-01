@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="数学知识 舒志彪 老师讲课太快了，刚课到一半就放弃记笔记了，这是课后补的。 组合数学基础  加法原理 乘法原理 选取问题——组合计数模型 集合的排列 集合的组合 多重集的排列 多重集的组合 二项式定理 组合恒等式——递推式 组合恒等式——变下项求和 恒等式求和——变系数和 恒等式求和——变上项求和 非降计数模型 Fibonacci数列 Catalan数  同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FOI夏令营2021Day3">
+<meta property="og:url" content="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day3/index.html">
+<meta property="og:site_name" content="Phaero">
+<meta property="og:description" content="数学知识 舒志彪 老师讲课太快了，刚课到一半就放弃记笔记了，这是课后补的。 组合数学基础  加法原理 乘法原理 选取问题——组合计数模型 集合的排列 集合的组合 多重集的排列 多重集的组合 二项式定理 组合恒等式——递推式 组合恒等式——变下项求和 恒等式求和——变系数和 恒等式求和——变上项求和 非降计数模型 Fibonacci数列 Catalan数  同">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day3/1.png">
+<meta property="article:published_time" content="2021-09-01T04:00:01.000Z">
+<meta property="article:modified_time" content="2021-11-01T04:21:43.253Z">
+<meta property="article:tag" content="OI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day3/1.png">
+
+<link rel="canonical" href="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>FOI夏令营2021Day3 | Phaero</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Phaero" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Phaero</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phaero">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FOI夏令营2021Day3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-01 12:00:01" itemprop="dateCreated datePublished" datetime="2021-09-01T12:00:01+08:00">2021-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-01 12:21:43" itemprop="dateModified" datetime="2021-11-01T12:21:43+08:00">2021-11-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="数学知识-舒志彪">数学知识 舒志彪</h1>
+<p>老师讲课太快了，刚课到一半就放弃记笔记了，这是课后补的。</p>
+<h2 id="组合数学基础">组合数学基础</h2>
+<ul>
+<li>加法原理</li>
+<li>乘法原理</li>
+<li>选取问题——组合计数模型</li>
+<li>集合的排列</li>
+<li>集合的组合</li>
+<li>多重集的排列</li>
+<li>多重集的组合</li>
+<li>二项式定理</li>
+<li>组合恒等式——递推式</li>
+<li>组合恒等式——变下项求和</li>
+<li>恒等式求和——变系数和</li>
+<li>恒等式求和——变上项求和</li>
+<li>非降计数模型</li>
+<li>Fibonacci数列</li>
+<li>Catalan数</li>
+</ul>
+<h2 id="同余">同余</h2>
+<ul>
+<li>同余</li>
+<li>一次同余方程</li>
+<li>逆元</li>
+<li>扩展欧几里得算法</li>
+<li>中国剩余定理(CRT)</li>
+<li>欧拉函数</li>
+<li>欧拉定理</li>
+<li>*素性测试(Miller-Rabin)</li>
+<li>*大数质因数分解(Pollard Rho)</li>
+</ul>
+<h2 id="杂项">杂项</h2>
+<ul>
+<li>矩阵快速幂</li>
+<li>高斯消元</li>
+<li>期望DP</li>
+</ul>
+<hr />
+<h2 id="组合数学基础-1">组合数学基础</h2>
+<h3 id="集合的排列">集合的排列</h3>
+<ul>
+<li><p>定义 从<span class="math inline">\(n\)</span>元集<span class="math inline">\(S\)</span>中有序、不重复选取的<span class="math inline">\(r\)</span>个元素成为<span class="math inline">\(S\)</span>的一个<span class="math inline">\(r\)</span>排列，<span class="math inline">\(S\)</span>的所有<span class="math inline">\(r\)</span>排列的数目记作<span class="math inline">\(P(n,r)\)</span>或<span class="math inline">\(P_n^r\)</span>。</p></li>
+<li><p>定理：</p></li>
+</ul>
+<p><span class="math display">\[
+P(n,r)=\dfrac{n!}{(n-r)!}
+\]</span></p>
+<ul>
+<li>证明：使用乘法原理。</li>
+<li>推论：集合<span class="math inline">\(S\)</span>的环排列数为</li>
+</ul>
+<p><span class="math display">\[
+\dfrac{P(n,r)}{r}
+\]</span></p>
+<h3 id="集合的组合">集合的组合</h3>
+<ul>
+<li>定义：从<span class="math inline">\(n\)</span>元集<span class="math inline">\(S\)</span>中无序、不重复选取的<span class="math inline">\(r\)</span>个元素成为<span class="math inline">\(S\)</span>的一个<span class="math inline">\(r\)</span>组合，<span class="math inline">\(S\)</span>的所有<span class="math inline">\(r\)</span>组合的数目记作<span class="math inline">\(C(n,r)\)</span>或<span class="math inline">\(C^r_n\)</span>。</li>
+<li>定理：</li>
+</ul>
+<p><span class="math display">\[
+C(n,r)=\dfrac{P(n,r)}{r!}
+\]</span></p>
+<ul>
+<li>推论</li>
+</ul>
+<p><span class="math display">\[
+C(n,r)=\dfrac{n}{r}{C(n-1,r-1)}
+\]</span></p>
+<p><span class="math display">\[
+C(n,r)=C(n,n-r)
+\]</span></p>
+<p><span class="math display">\[
+C(n,r)=C(n-1,r-1)+C(n-1,r)
+\]</span></p>
+<ul>
+<li>上述三个推论与杨辉三角相对应。</li>
+</ul>
+<h3 id="多重集的排列">多重集的排列</h3>
+<ul>
+<li>多重集<span class="math inline">\(S=\{n_1a_1,n_2a_2,\cdots,n_ka_k\},0&lt;n_i\leq +\infty\)</span></li>
+<li>全排列<span class="math inline">\(r=n,n=n_1+n_2+\cdots+n_k\)</span>，</li>
+</ul>
+<p><span class="math display">\[
+N=\dfrac{n!}{n_1!n_2!\cdots n_k!}=\binom{n}{n_1\,\,n_2\,\,\cdots\,\,n_k}
+\]</span></p>
+<ul>
+<li>证明：分步选取，先放<span class="math inline">\(a_1\)</span>，有<span class="math inline">\(C(n,n_1)\)</span>种方法，再放<span class="math inline">\(a_2\)</span>有<span class="math inline">\(C(n-n_1-n_2,n_2)\)</span>种方法，<span class="math inline">\(\cdots\)</span>，放<span class="math inline">\(a_k\)</span>，有<span class="math inline">\(C(n-n_1-n_2-\cdots-n_{k-1},n_k)\)</span>种方法。</li>
+</ul>
+<p><span class="math display">\[
+N=C(n,n_1)C(n-n_1,n_2)\cdots C(n-n_1-n_2-\cdots-n_{k-1},n_k)\\=\dfrac{n!}{n_1!(n-n_1)!}\dfrac{(n-n_1)!}{n_2!(n-n_1-n_2)!}\cdots \dfrac{(n-n_1-\cdots-n_{k-1})!}{n_k!0!}=\dfrac{n!}{n_1!n_2!\cdots n_k!}
+\]</span></p>
+<ul>
+<li>若<span class="math inline">\(r\leq n_i\)</span>时，每个位置都有<span class="math inline">\(k\)</span>种选法，有<span class="math inline">\(N=k^r\)</span>。</li>
+</ul>
+<h3 id="多重集的组合">多重集的组合</h3>
+<ul>
+<li>多重集<span class="math inline">\(S=\{n_1a_1,n_2a_2,\cdots,n_ka_k\},0&lt;n_i\leq +\infin\)</span></li>
+<li>当<span class="math inline">\(r\leq n_i\)</span>时，<span class="math inline">\(S\)</span>的<span class="math inline">\(r\)</span>组合数为</li>
+</ul>
+<p><span class="math display">\[
+N=C(k+r-1,r)
+\]</span></p>
+<ul>
+<li>证明：一个<span class="math inline">\(r\)</span>组合为<span class="math inline">\(\{x_1a_1,x_2a_2,\cdots,x_ka_k\}\)</span>,其中<span class="math inline">\(x_1+x_2+\cdots+x_k=r\)</span>，<span class="math inline">\(x_i\)</span>为非负整数，这个不定方程非负整数解对应于<span class="math inline">\(r\)</span>个<span class="math inline">\(1\)</span>，<span class="math inline">\(k-1\)</span>个<span class="math inline">\(0\)</span>的全排列数为</li>
+</ul>
+<p><span class="math display">\[
+N=\dfrac{(r+k-1)!}{r!(k-1)!}=C(k+r-1,r)
+\]</span></p>
+<h3 id="二项式定理">二项式定理</h3>
+<ul>
+<li>定理：设<span class="math inline">\(n\)</span>是正整数，对一切<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span></li>
+</ul>
+<p><span class="math display">\[
+(x+y)^n=\sum^{n}_{k=0}\binom{n}{k}x^ky^{n-k}
+\]</span></p>
+<ul>
+<li>证明：数学归纳法、组合分析法，分析系数的每一项，参考杨辉三角即可得证。</li>
+</ul>
+<h3 id="组合恒等式递推式">组合恒等式——递推式</h3>
+<p><span class="math display">\[
+1.\binom{n}{k} = \binom{n}{n-k}
+\]</span></p>
+<p><span class="math display">\[
+2.\binom{n}{k} = \dfrac{n}{k}\binom{n-1}{k-1}\\
+\]</span></p>
+<p><span class="math display">\[
+3.\binom{n}{k} = \binom{n-1}{k}+\binom{n-1}{k-1}
+\]</span></p>
+<ul>
+<li>1式用于化简。</li>
+<li>2式用于求和时消去变系数。</li>
+<li>3式即（Pascal公式）用于求和时拆项（两项之和或者差），然后合并。</li>
+</ul>
+<h3 id="组合恒等式变下项求和">组合恒等式——变下项求和</h3>
+<p><span class="math display">\[
+4.\sum^{n}_{k=0}\binom{n}{k}=2^n
+\]</span></p>
+<p><span class="math display">\[
+5.\sum^n_{i=0}(-1)^i\binom{n}{k}=0
+\]</span></p>
+<ul>
+<li>4式证明：设<span class="math inline">\(S=\{1,2,\cdots,n\}\)</span>，下面计数<span class="math inline">\(S\)</span>的每个子集，<span class="math inline">\(n\)</span>元集合的<span class="math inline">\(k\)</span>子集个数是<span class="math inline">\(\binom{n}{k}\)</span>，根据加法原理，子集总数为<span class="math inline">\(\sum^{n}_{k=0}\binom{n}{k}=2^n\)</span>。</li>
+</ul>
+<h3 id="恒等式求和变系数和">恒等式求和——变系数和</h3>
+<p><span class="math display">\[
+6.\sum^n_{k=0}k\binom{n}{k}=n2^{n-1}\\
+\]</span></p>
+<p><span class="math display">\[
+7.\sum^n_{k=0}k^2\binom{n}{k}=n(n+1)2^{n-2}
+\]</span></p>
+<ul>
+<li>证明：二项式定理、级数求导，其他组合恒等式带入。</li>
+<li>证明公式6</li>
+</ul>
+<p><span class="math display">\[
+(1+x)^n=\sum^n_{k=0}\binom{n}{k}x^k=1+\sum^n_{k=1}\binom{n}{k}x^k
+\]</span></p>
+<p><span class="math display">\[
+Derivative: n(1+x)^{n-1}=\sum^n_{k=1}k\binom{n}{k}x^{k-1}\\
+\therefore n2^{n-1}=\sum^n_{k=1}k\binom{n}{k}=\sum^n_{k=0}k\binom{n}{k}
+\]</span></p>
+<ul>
+<li>证明公式7</li>
+</ul>
+<p><span class="math display">\[
+\sum^n_{k=0}\binom{n}{k}=\sum^n_{k=1}k^2\dfrac{n}{k}\binom{n-1}{k-1}\\
+=\sum^n_{k=1}kn\binom{n-1}{k-1}=n\sum^n_{k=1}[(k-1)+1]\binom{n-1}{k-1}\\
+=n\sum^n_{k=1}(k-1)\binom{n-1}{k-1}+n\sum^n_{k=1}\binom{n-1}{k-1}\\
+=n\sum^{n-1}_{k=0}k\binom{n-1}{k}+n2^{n-1}\\
+=n(n-1)2^{n-2}+n2^{n-1}=n(n+1)2^{n-2}
+\]</span></p>
+<h3 id="恒等式求和变上项求和">恒等式求和——变上项求和</h3>
+<p><span class="math display">\[
+8.\sum^n_{l=0}\binom{l}{k}=\binom{n+1}{k+1},\,\,n,k\in N
+\]</span></p>
+<p>证明：组合分析。令<span class="math inline">\(S=\{a_1,a_2,\cdots,a_{n+1}\}\)</span>为<span class="math inline">\(n+1\)</span>元集合，等式右边式<span class="math inline">\(S\)</span>的<span class="math inline">\(k+1\)</span>子集数。考虑另一种分类计数的方法。将所有的<span class="math inline">\(k+1\)</span>元集合分成如下<span class="math inline">\(n+1\)</span>类： + 第<span class="math inline">\(1\)</span>类：含<span class="math inline">\(a_1\)</span>，剩下<span class="math inline">\(k\)</span>个元素取自<span class="math inline">\(\{a_2,\cdots,a_{n+1}\}\)</span>，有<span class="math inline">\(\binom{n}{k}\)</span>种. + 第<span class="math inline">\(2\)</span>类：不含<span class="math inline">\(a_1\)</span>，含<span class="math inline">\(a_2\)</span>，剩下<span class="math inline">\(k\)</span>个元素取自<span class="math inline">\(\{a_3,\cdots,a_{n+1}\}\)</span>，有<span class="math inline">\(\binom{n-1}{k}\)</span>种。 + <span class="math inline">\(\cdots\)</span> + 不含<span class="math inline">\(a_1,a_2,\cdots,a_n\)</span>，含<span class="math inline">\(a_{n+1}\)</span>,剩下<span class="math inline">\(k\)</span>个元素取自空集<span class="math inline">\(\binom{0}{k}\)</span>。 + 从而由加法原理得证。</p>
+<h3 id="组合恒等式解题办法小结">组合恒等式解题办法小结</h3>
+<h4 id="证明方法">证明方法：</h4>
+<ul>
+<li>已知恒等式代入。</li>
+<li>二项式定理。</li>
+<li>幂函数的求导、积分。</li>
+<li>归纳法。</li>
+<li>组合分析。 #### 求和方法：</li>
+<li>Pascal公式。</li>
+<li>级数求和。</li>
+<li>观察和的结果，用归纳法证明。</li>
+<li>利用已知的公式。</li>
+</ul>
+<h3 id="非降计数模型">非降计数模型</h3>
+<ul>
+<li><span class="math inline">\((0,0)\)</span>到<span class="math inline">\((m,n)\)</span>的非降路径数：<span class="math inline">\(C(m+n,m)\)</span>。</li>
+<li><span class="math inline">\((a,b)\)</span>到<span class="math inline">\((m,n)\)</span>的非降路径数等于<span class="math inline">\((0,0)\)</span>到<span class="math inline">\((m-a,n-b)\)</span>的非降路径数。</li>
+<li><span class="math inline">\((a,b)\)</span>经过<span class="math inline">\((c,d)\)</span>到<span class="math inline">\((m,n)\)</span>的非降路经数：乘法原理。</li>
+</ul>
+<h3 id="fibonacci">Fibonacci</h3>
+<p>一笔带过，只提到了<span class="math inline">\(F_n=F_{n-1}+F_{n-2}\)</span>。</p>
+<h3 id="catalan数">Catalan数</h3>
+<ul>
+<li>一个凸n边形用三角形剖分的方案数即为Catalan数<span class="math inline">\(h_n\)</span>。</li>
+</ul>
+<p><img src="1.png" /></p>
+<ul>
+<li>如图所示，以<span class="math inline">\(v_{n+1}v_1\)</span>为一条边的三角形<span class="math inline">\(v_{n+1}v_1v_k\)</span>将凸<span class="math inline">\(n+1\)</span>边形分割成两部分。 一部分是<span class="math inline">\(k\)</span>边形，另一部分是<span class="math inline">\(n-k-2\)</span>边形，<span class="math inline">\(k=2,3,\cdots,n\)</span>，即<span class="math inline">\(v_k\)</span>点可以是<span class="math inline">\(v_2,v_3,\cdots,v_n\)</span>点中任意一点。依据加法原理有：</li>
+</ul>
+<p><span class="math display">\[
+h_{n+1}=\sum^n_{k=2}h_kh_{n-k+2}=h_2h_n+h_3h_{n-1}+\cdots+h_{n-1}h_3+h_nh_2
+\]</span></p>
+<ul>
+<li>递推关系</li>
+</ul>
+<p><span class="math display">\[
+h_{n+1}=h_2h_n+h_3h_{n-1}+\cdots+h_{n-1}h_3+h_nh_2
+\]</span></p>
+<p><span class="math display">\[
+(n-3)h_n=\dfrac{n}{2}(h_3h_{n-1}+h_4h_{n-2}+\cdots+h_{n-2}h_4+h_{n-1}h_3)
+\]</span></p>
+<ul>
+<li>计算公式</li>
+</ul>
+<p><span class="math display">\[
+h_{n+1}=\dfrac{1}{n}\binom{2n-2}{n-1}
+\]</span> ____________________ ## 同余</p>
+<h3 id="同余-1">同余</h3>
+<ul>
+<li>定义：设<span class="math inline">\(m\)</span>是正整数，<span class="math inline">\(a\)</span>和<span class="math inline">\(b\)</span>是整数。如果<span class="math inline">\(m\mid a-b\)</span>，则称<span class="math inline">\(a\)</span>模<span class="math inline">\(m\)</span>同余于<span class="math inline">\(b\)</span>，或<span class="math inline">\(a\)</span>与<span class="math inline">\(b\)</span>模<span class="math inline">\(m\)</span>同余，记作</li>
+</ul>
+<p><span class="math display">\[
+a\equiv b(mod \,\,m)
+\]</span></p>
+<ul>
+<li>性质：若<span class="math inline">\(a\equiv b(mod\,\,m),c\equiv d(mod\,\,m)\)</span>，则 <span class="math display">\[
+a+c\equiv b+d(mod\,\,m)\,\,\,\,\,a-c\equiv b-d(mod\,\,m)
+\]</span></li>
+</ul>
+<p><span class="math display">\[
+ac\equiv bd(mod\,\,m)
+\]</span></p>
+<p><span class="math display">\[
+a^k\equiv b^k(mod\,\,m),k\geq0
+\]</span></p>
+<h3 id="一次同余方程">一次同余方程</h3>
+<ul>
+<li>一次同余方程的形式为 <span class="math display">\[
+ax\equiv c(mod \,\,m),m&gt;0
+\]</span></li>
+<li>一次同余方程的解即为使方程成立的整数。</li>
+<li>方程<span class="math inline">\(ax\equiv c(mod \,\,m),m&gt;0\)</span>有解的充要条件为<span class="math inline">\(gcd(a,m)|c\)</span>，即裴蜀定理。</li>
+<li>证明略。</li>
+</ul>
+<h3 id="逆元">逆元</h3>
+<ul>
+<li>定义：如果<span class="math inline">\(ab\equiv 1(mod \,\,m)\)</span>，则称<span class="math inline">\(b\)</span>是<span class="math inline">\(a\)</span>在模<span class="math inline">\(m\)</span>意义下的逆元，记作<span class="math inline">\(a^{-1}(mod \,\,m)\)</span>或<span class="math inline">\(a^{-1}\)</span></li>
+<li><span class="math inline">\(a^{-1}(mod\,\,m)\)</span>是方程<span class="math inline">\(ax\equiv 1(mod \,\,m)\)</span>的解。</li>
+<li>当且仅当<span class="math inline">\(gcd(a,m)=1\)</span>时，<span class="math inline">\(a^{-1}(mod\,\,m)\)</span>才存在，且只有一个。</li>
+</ul>
+<h3 id="扩展欧几里得算法">扩展欧几里得算法</h3>
+<p>比较简单，而且会了，略。</p>
+<h3 id="中国剩余定理crt">中国剩余定理(CRT)</h3>
+<ul>
+<li>解如下方程组 <span class="math display">\[
+\begin{cases}
+x\equiv a_1(mod\,\,m_1)\\
+x\equiv a_2(mod\,\,m_2)\\
+\cdots\\
+x\equiv a_n(mod\,\,m_n)
+\end{cases}
+\]</span></li>
+<li>其中<span class="math inline">\(m_1,m_2,\cdots,m_n\)</span>两两互质且<span class="math inline">\(M=\prod^n_{i=1}m_i\)</span>较小</li>
+<li>其解为</li>
+</ul>
+<p><span class="math display">\[
+x\equiv \sum^n_{i=1}a_i(\dfrac{M}{m_i})^{-1}\dfrac{M}{m_i}(mod\,\,M)
+\]</span></p>
+<p>其中注意<span class="math inline">\(\dfrac{M}{m_i}\)</span>的逆元是在<span class="math inline">\(mod\,\,m_i\)</span>的意义下的。</p>
+<h3 id="欧拉函数">欧拉函数</h3>
+<ul>
+<li>欧拉函数<span class="math inline">\(\phi(n):\{1,\cdots,n-1\}\)</span>中与<span class="math inline">\(n\)</span>互质的数的个数。</li>
+<li>性质：</li>
+<li><span class="math inline">\(\phi(n)=n\prod_{p\mid n}(1-\dfrac{1}{p})\)</span>。</li>
+<li><span class="math inline">\(\forall n&gt;1\)</span>，<span class="math inline">\(1\)</span>到<span class="math inline">\(n\)</span>种与<span class="math inline">\(n\)</span>互质的数的和为<span class="math inline">\(\dfrac{n\times\phi(n)}{2}\)</span>。</li>
+<li>若<span class="math inline">\(gcd(a,b)=1\)</span>，则<span class="math inline">\(\phi(ab)=\phi(a)\phi(b)\)</span>。</li>
+<li>设<span class="math inline">\(p\)</span>为质数，若<span class="math inline">\(p\mid n\)</span>且<span class="math inline">\(p^2\mid n\)</span>，则<span class="math inline">\(\phi(n)=\phi(\dfrac{n}{p})*p\)</span>。</li>
+<li>设<span class="math inline">\(p\)</span>为质数，若<span class="math inline">\(p\mid n\)</span>且<span class="math inline">\(p^2\nmid n\)</span>，则<span class="math inline">\(\phi(n)=\phi(\dfrac{n}{p})*(p-1)\)</span></li>
+<li><span class="math inline">\(\sum_{d\mid n}\phi(d)=n\)</span></li>
+</ul>
+<h3 id="欧拉定理">欧拉定理</h3>
+<ul>
+<li>定理（欧拉定理）设<span class="math inline">\(a\)</span>与<span class="math inline">\(n\)</span>互质，则</li>
+</ul>
+<p><span class="math display">\[
+a^{\phi(n)}\equiv1(mod\,\,m)
+\]</span></p>
+<ul>
+<li>欧拉定理证明太复杂，略。</li>
+<li>欧拉定理推论</li>
+</ul>
+<p><span class="math display">\[
+1.\because gcd(a,m)=1\therefore a^{-1}\equiv a^{\phi(m)-1}(mod\,\,m)\\
+\]</span></p>
+<p><span class="math display">\[
+2.\,a^b\equiv \begin{cases}
+a^b,b&lt;\phi(m)\\
+a^{b\,\,mod\,\, \phi(m)+\phi(m)},b\geq \phi(m)
+\end{cases}(mod\,\,m)
+\]</span></p>
+<ul>
+<li>推论1可用于求逆元，推论2可以降低要求的幂次（欧拉降幂）</li>
+<li>费马小定理（可以用欧拉定理直接一步推出），设<span class="math inline">\(p\)</span>是质数，<span class="math inline">\(a\)</span>与<span class="math inline">\(p\)</span>互质，则</li>
+</ul>
+<p><span class="math display">\[
+a^{p-1}\equiv1(mod\,\,p)\,\,,\,\,a^p\equiv a(mod\,\,p)
+\]</span></p>
+<h3 id="素性测试miller-rabin">*素性测试(Miller-Rabin)</h3>
+<ul>
+<li>即检测一个数是否是质数。</li>
+<li>虽然Wilson定理对于给定的正整数<span class="math inline">\(n\)</span>，其为素数的充要条件为</li>
+</ul>
+<p><span class="math display">\[
+(n-1)!\equiv-1(mod\,\,n)
+\]</span></p>
+<ul>
+<li>但是运用Wilson定理的计算量太大，目前，有一些随机算法可以进行素性测试，比如下面描述的Miller-Rabin算法。</li>
+<li>这个算法是有错误概率的，从数学上无法证明通过测试的数一定是质数，检测<span class="math inline">\(k\)</span>次，其错误概率为<span class="math inline">\((\dfrac{1}{4})^k\)</span>，这是保守估计，检测多次后错误概率很小。</li>
+<li>引理1（费马小定理）：设<span class="math inline">\(p\)</span>是质数，<span class="math inline">\(a\)</span>与<span class="math inline">\(p\)</span>互质，则<span class="math inline">\(a^{p-1}\equiv1(mod\,\,p)\)</span>，费马小定理只是<span class="math inline">\(n\)</span>为质数的必要条件。</li>
+<li>引理2（二次探测定理）：如果<span class="math inline">\(p\)</span>是一个质数，且<span class="math inline">\(0&lt;x&lt;p\)</span>，则方程<span class="math inline">\(x^2\equiv1(mod\,\,p)\)</span>的解为<span class="math inline">\(x=1\)</span>或<span class="math inline">\(x=p-1\)</span>。</li>
+<li>该算法的过程为：
+<ul>
+<li>给定奇数<span class="math inline">\(n\)</span>，令<span class="math inline">\(n-1=2^qm\)</span>为了判断是否为素数，首先测试<span class="math inline">\(a^{2^qm}\equiv1(mod\,\,n)\)</span>是否成立，不成立，则<span class="math inline">\(n\)</span>一定为合数，成立则进一步测试。</li>
+<li>考察下面的Miller数列</li>
+<li><span class="math inline">\(a^m(mod\,\,n),a^{2m}(mod\,\,n),a^{4m}(mod\,\,n),\cdots,a^{2^{q-1}m}(mod\,\,n)\)</span></li>
+<li>若<span class="math inline">\(a^m\equiv1(mod\,\,n)\)</span>，或者存在某个整数<span class="math inline">\(0\leq r\leq q-1\)</span>，使<span class="math inline">\(a^{2^rm}\equiv n-1(mod\,\,n)\)</span>成立，则称<span class="math inline">\(n\)</span>通过Miller测试。</li>
+</ul></li>
+<li>具体实现流程：
+<ul>
+<li><span class="math inline">\(1.\,\)</span>对于偶数和<span class="math inline">\(0,1,2\)</span>可以直接判断。</li>
+<li><span class="math inline">\(2.\,\)</span>设要测试的数为<span class="math inline">\(x\)</span>，我们取一个较小的质数<span class="math inline">\(a\)</span>，设<span class="math inline">\(s,t\)</span>，满足<span class="math inline">\(2^s\times t=x-1\)</span>，其中<span class="math inline">\(t\)</span>是奇数。</li>
+<li><span class="math inline">\(3.\,\)</span>我们先算出<span class="math inline">\(a^t\)</span>，然后不断地平方并且进行二次探测（进行<span class="math inline">\(s\)</span>次）。</li>
+<li><span class="math inline">\(4.\,\)</span>最后我们根据费马小定理，如果最后<span class="math inline">\(a^(x-1)\not\equiv1(mod\,\,x)\)</span>，则说明<span class="math inline">\(x\)</span>为合数。</li>
+</ul></li>
+<li>备注：
+<ul>
+<li><span class="math inline">\(1.\,\)</span>我们可以多选择几个<span class="math inline">\(a\)</span>，如果全部通过，那么<span class="math inline">\(x\)</span>大概率是质数。</li>
+<li><span class="math inline">\(2.\,\)</span>Miller-Rabin素数测试中，“大概率”意味着几率非常大，基本上可以放心使用。</li>
+<li><span class="math inline">\(3.\,\)</span>当<span class="math inline">\(a\)</span>取遍所有小于<span class="math inline">\(30\)</span>的所有质数时，可以证明<span class="math inline">\(int\)</span>范围内不会出错。</li>
+</ul></li>
+</ul>
+<h3 id="大数质因数分解pollard-rho">*大数质因数分解(Pollard Rho)</h3>
+<ul>
+<li>给定你一个数<span class="math inline">\(n\)</span>，让你把它分解成多个素数的乘积。</li>
+<li>对于一个数<span class="math inline">\(n\)</span>，只需要如下步骤即可分为若干个素数：
+<ul>
+<li>找到一个数<span class="math inline">\(p\)</span>，使<span class="math inline">\(p\mid n\)</span></li>
+<li>那么<span class="math inline">\(n\)</span>就可以变成<span class="math inline">\(p\)</span>和<span class="math inline">\(\dfrac{n}{p}\)</span></li>
+<li>如果<span class="math inline">\(p\)</span>和<span class="math inline">\(\dfrac{n}{p}\)</span>不是素数，当成<span class="math inline">\(n\)</span>重新第一步。</li>
+</ul></li>
+<li>判断<span class="math inline">\(p\)</span>是否为质数用Miller-Rabin算法，最关键的是找到这个素数<span class="math inline">\(p\)</span>。</li>
+<li>因为随机产生<span class="math inline">\(p\)</span>可能一直找不到，所以我们要用下面的方法，用两个数的差代替<span class="math inline">\(p\)</span>
+<ul>
+<li>随机产生一个数<span class="math inline">\(p_1\)</span>和一个随机常数<span class="math inline">\(c\)</span>，令<span class="math inline">\(p_2=(p_1^2+c)\mod n\)</span></li>
+<li>如果<span class="math inline">\(|p_2-p_1|\)</span>可以被<span class="math inline">\(n\)</span>整除，说明已经找到，如果找不到，令<span class="math inline">\(p_1=p_2\)</span>继续第一步。</li>
+</ul></li>
+<li>也就是<span class="math inline">\(p-&gt;(p^2+c)\mod n\)</span>，这样基本是不会出现<span class="math inline">\(p\)</span>变回从前的数从而进行循环的情况。且一直重复的情况下，<span class="math inline">\(|(p^2+c)\mod n\,\,\,-p|\)</span>也基本不会重复。</li>
+<li>如何判环？使用数组和map空间会爆炸，所以使用Floyd判环这种空间复杂度为<span class="math inline">\(O(1)\)</span>的方法。</li>
+<li>因为循环节可能是走着走着才出现的，就像希腊字母<span class="math inline">\(\rho\)</span>(Rho)，所以此法得名Pollard Rho。</li>
+</ul>
+<hr />
+<h2 id="杂项-1">杂项</h2>
+<h3 id="矩阵快速幂">矩阵快速幂</h3>
+<p>挺简单的，就不记了。</p>
+<h3 id="高斯消元">高斯消元</h3>
+<ul>
+<li>具体实现没有记录。</li>
+<li>复杂度<span class="math inline">\(O(nm^2)\)</span>。</li>
+<li>在非质数剩余系下的消元使用辗转相除法。如：</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases}
+4x+6y\equiv10(mod\,\,12)\\
+2x+10y\equiv6(mod\,\,12)
+\end{cases}
+\]</span></p>
+<ul>
+<li>高斯消元在OI中的用处：
+<ul>
+<li>它的特征在于转移成环。</li>
+<li>如果是最优化类的转移成环，使用最短路。</li>
+<li>如果是计数类的转移成环，解方程。</li>
+</ul></li>
+</ul>
+<h3 id="期望dp">期望DP</h3>
+<h4 id="例题随机游走问题">例题：随机游走问题</h4>
+<ul>
+<li>给定一个<span class="math inline">\(n\)</span>个点<span class="math inline">\(m\)</span>条边的简单无向连通图，一开始有一个人在<span class="math inline">\(1\)</span>号点。</li>
+<li>每次行走，他都会等概率地选择一条与该点相邻的边，沿着这条边走向下一个点。</li>
+<li>问从<span class="math inline">\(1\)</span>号点走到<span class="math inline">\(n\)</span>号点的期望步数。</li>
+<li>记<span class="math inline">\(f_u\)</span>表示点<span class="math inline">\(u\)</span>走到<span class="math inline">\(n\)</span>的期望步数。</li>
+<li>对每个点建立方程</li>
+</ul>
+<p><span class="math display">\[
+f_u=\begin{cases}
+\dfrac{\sum_{(u,v)\in E}f_v}{deg_u}+1,u\neq n\\
+0, u=n
+\end{cases}
+\]</span></p>
+<ul>
+<li>运用高斯消元解决。</li>
+</ul>
+<h4 id="例题树上随机游走问题">例题：树上随机游走问题</h4>
+<ul>
+<li>对每个点建立同样的方程。</li>
+<li>将<span class="math inline">\(n\)</span>号点设为根节点。</li>
+<li>此时，叶子的方程总是<span class="math inline">\(f_u=f_{father_u}+1\)</span>。</li>
+<li><span class="math inline">\(f_u\)</span>只和<span class="math inline">\(f_{father_u}\)</span>有关系，直接用<span class="math inline">\(f_{father_u}+1\)</span>表示<span class="math inline">\(f_u\)</span>。</li>
+<li>自底向上地消元，每次把儿子元用父亲元表示。</li>
+<li>消到<span class="math inline">\(n\)</span>的儿子，用<span class="math inline">\(f_n\)</span>自顶向下的带入回去。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day2/" rel="prev" title="FOI夏令营2021Day2">
+      <i class="fa fa-chevron-left"></i> FOI夏令营2021Day2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day4/" rel="next" title="FOI夏令营2021Day4">
+      FOI夏令营2021Day4 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86-%E8%88%92%E5%BF%97%E5%BD%AA"><span class="nav-number">1.</span> <span class="nav-text">数学知识 舒志彪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="nav-number">1.1.</span> <span class="nav-text">组合数学基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E4%BD%99"><span class="nav-number">1.2.</span> <span class="nav-text">同余</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%82%E9%A1%B9"><span class="nav-number">1.3.</span> <span class="nav-text">杂项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80-1"><span class="nav-number">1.4.</span> <span class="nav-text">组合数学基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E6%8E%92%E5%88%97"><span class="nav-number">1.4.1.</span> <span class="nav-text">集合的排列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E7%BB%84%E5%90%88"><span class="nav-number">1.4.2.</span> <span class="nav-text">集合的组合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E9%9B%86%E7%9A%84%E6%8E%92%E5%88%97"><span class="nav-number">1.4.3.</span> <span class="nav-text">多重集的排列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E9%9B%86%E7%9A%84%E7%BB%84%E5%90%88"><span class="nav-number">1.4.4.</span> <span class="nav-text">多重集的组合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86"><span class="nav-number">1.4.5.</span> <span class="nav-text">二项式定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%81%92%E7%AD%89%E5%BC%8F%E9%80%92%E6%8E%A8%E5%BC%8F"><span class="nav-number">1.4.6.</span> <span class="nav-text">组合恒等式——递推式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%81%92%E7%AD%89%E5%BC%8F%E5%8F%98%E4%B8%8B%E9%A1%B9%E6%B1%82%E5%92%8C"><span class="nav-number">1.4.7.</span> <span class="nav-text">组合恒等式——变下项求和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%92%E7%AD%89%E5%BC%8F%E6%B1%82%E5%92%8C%E5%8F%98%E7%B3%BB%E6%95%B0%E5%92%8C"><span class="nav-number">1.4.8.</span> <span class="nav-text">恒等式求和——变系数和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%92%E7%AD%89%E5%BC%8F%E6%B1%82%E5%92%8C%E5%8F%98%E4%B8%8A%E9%A1%B9%E6%B1%82%E5%92%8C"><span class="nav-number">1.4.9.</span> <span class="nav-text">恒等式求和——变上项求和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%81%92%E7%AD%89%E5%BC%8F%E8%A7%A3%E9%A2%98%E5%8A%9E%E6%B3%95%E5%B0%8F%E7%BB%93"><span class="nav-number">1.4.10.</span> <span class="nav-text">组合恒等式解题办法小结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%81%E6%98%8E%E6%96%B9%E6%B3%95"><span class="nav-number">1.4.10.1.</span> <span class="nav-text">证明方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E9%99%8D%E8%AE%A1%E6%95%B0%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.11.</span> <span class="nav-text">非降计数模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fibonacci"><span class="nav-number">1.4.12.</span> <span class="nav-text">Fibonacci</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#catalan%E6%95%B0"><span class="nav-number">1.4.13.</span> <span class="nav-text">Catalan数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E4%BD%99-1"><span class="nav-number">1.4.14.</span> <span class="nav-text">同余</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E6%AC%A1%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B"><span class="nav-number">1.4.15.</span> <span class="nav-text">一次同余方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%85%83"><span class="nav-number">1.4.16.</span> <span class="nav-text">逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95"><span class="nav-number">1.4.17.</span> <span class="nav-text">扩展欧几里得算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86crt"><span class="nav-number">1.4.18.</span> <span class="nav-text">中国剩余定理(CRT)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.19.</span> <span class="nav-text">欧拉函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86"><span class="nav-number">1.4.20.</span> <span class="nav-text">欧拉定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A0%E6%80%A7%E6%B5%8B%E8%AF%95miller-rabin"><span class="nav-number">1.4.21.</span> <span class="nav-text">*素性测试(Miller-Rabin)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E8%B4%A8%E5%9B%A0%E6%95%B0%E5%88%86%E8%A7%A3pollard-rho"><span class="nav-number">1.4.22.</span> <span class="nav-text">*大数质因数分解(Pollard Rho)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%82%E9%A1%B9-1"><span class="nav-number">1.5.</span> <span class="nav-text">杂项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82"><span class="nav-number">1.5.1.</span> <span class="nav-text">矩阵快速幂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83"><span class="nav-number">1.5.2.</span> <span class="nav-text">高斯消元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9Bdp"><span class="nav-number">1.5.3.</span> <span class="nav-text">期望DP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0%E9%97%AE%E9%A2%98"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">例题：随机游走问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E6%A0%91%E4%B8%8A%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0%E9%97%AE%E9%A2%98"><span class="nav-number">1.5.3.2.</span> <span class="nav-text">例题：树上随机游走问题</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

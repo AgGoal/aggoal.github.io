@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="图论  回路  欧拉回路  差分约束 连通分量  强连通分量 点双连通分量、割点 边双连通分量、割边    回路  定义：有向图\(G&#x3D;(V,E)\)中，若边序列\(P&#x3D;(e_1,e_2,\cdots,e_q)\)，其中\(e_k&#x3D;(v_i,v_j)\)，满足\(v_i\)是\(e_{k-1}\)的终点，则称\(P\)是\(G\)的一条有向道路。若\(e_q\)的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FOI夏令营2021Day5">
+<meta property="og:url" content="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day5/index.html">
+<meta property="og:site_name" content="Phaero">
+<meta property="og:description" content="图论  回路  欧拉回路  差分约束 连通分量  强连通分量 点双连通分量、割点 边双连通分量、割边    回路  定义：有向图\(G&#x3D;(V,E)\)中，若边序列\(P&#x3D;(e_1,e_2,\cdots,e_q)\)，其中\(e_k&#x3D;(v_i,v_j)\)，满足\(v_i\)是\(e_{k-1}\)的终点，则称\(P\)是\(G\)的一条有向道路。若\(e_q\)的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-01T04:00:03.000Z">
+<meta property="article:modified_time" content="2021-11-01T04:23:30.432Z">
+<meta property="article:tag" content="OI">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>FOI夏令营2021Day5 | Phaero</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Phaero" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Phaero</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phaero">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FOI夏令营2021Day5
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-01 12:00:03" itemprop="dateCreated datePublished" datetime="2021-09-01T12:00:03+08:00">2021-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-01 12:23:30" itemprop="dateModified" datetime="2021-11-01T12:23:30+08:00">2021-11-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="图论">图论</h1>
+<ul>
+<li>回路
+<ul>
+<li>欧拉回路</li>
+</ul></li>
+<li>差分约束</li>
+<li>连通分量
+<ul>
+<li>强连通分量</li>
+<li>点双连通分量、割点</li>
+<li>边双连通分量、割边</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="回路">回路</h2>
+<ul>
+<li>定义：有向图<span class="math inline">\(G=(V,E)\)</span>中，若边序列<span class="math inline">\(P=(e_1,e_2,\cdots,e_q)\)</span>，其中<span class="math inline">\(e_k=(v_i,v_j)\)</span>，满足<span class="math inline">\(v_i\)</span>是<span class="math inline">\(e_{k-1}\)</span>的终点，则称<span class="math inline">\(P\)</span>是<span class="math inline">\(G\)</span>的一条有向道路。若<span class="math inline">\(e_q\)</span>的终点也是<span class="math inline">\(e_1\)</span>的起点，则称<span class="math inline">\(P\)</span>是<span class="math inline">\(G\)</span>的回路。</li>
+<li>无向图定义显然。</li>
+<li>初级回路：回路中所有点的编号互不相同</li>
+<li>简单回路：回路中所有边的编号互不相同</li>
+</ul>
+<h3 id="欧拉回路">欧拉回路</h3>
+<ul>
+<li>无向连通图<span class="math inline">\(G=(V,E)\)</span>中的一条经过所有边的简单道路（回路）成为<span class="math inline">\(G\)</span>的欧拉道路（回路）</li>
+<li>无向连通图<span class="math inline">\(G\)</span>有欧拉回路的充要条件是各顶点的度都是偶数。</li>
+<li>必要性：欧拉回路经过每个点是都会进去一次在出来一次，每次对一个点的度数贡献是<span class="math inline">\(2\)</span>，所以每个点的度数都一定是偶数。</li>
+<li>充分性：构造法。假定一个起点，一定可以找到一个简单的普通回路。将回路删去，剩下所有点的度数都是偶数，由于图联通，剩下的图与回路相交，再找一个更大的回路，可以与第一个回路构成更大的回路，重复操作知道找到原图的欧拉回路。</li>
+<li>欧拉道路：欧拉回路删去其中的一条边，即欧拉道路的起点和终点连边后成为欧拉回路。</li>
+</ul>
+<h4 id="例题poj1386-play-on-words">例题：poj1386 Play On Words</h4>
+<ul>
+<li>给你<span class="math inline">\(n\)</span>个单词，要求这些单词相连，要求是前面的字母的尾字母和后面单词的头字母相同，问你这<span class="math inline">\(n\)</span>个单词能不能全部连起来，可以连成一条链或者连成一个环。</li>
+<li><span class="math inline">\(n\leq 10^5\)</span></li>
+</ul>
+<h4 id="例题混合图的欧拉回路">例题：混合图的欧拉回路</h4>
+<ul>
+<li>给定一张既有无向边又有有向边的图，求其欧拉回路</li>
+<li>图中无向边可以从<span class="math inline">\(a\)</span>走向<span class="math inline">\(b\)</span>，也可以从<span class="math inline">\(b\)</span>走向<span class="math inline">\(a\)</span>，但只能走一次。</li>
+<li>图中的无向边只能按照给定方向走，也只能走一次。</li>
+<li>正解：先随便指定无向边的方向，用网络流求出选错方向的无向边。</li>
+</ul>
+<h4 id="例题2020联合省选-丁香之路">例题：2020联合省选 丁香之路</h4>
+<ul>
+<li>有一个<span class="math inline">\(n\)</span>个点的图，<span class="math inline">\(i,j\)</span>两点测长度为<span class="math inline">\(|i-j|\)</span>。有<span class="math inline">\(m\)</span>条必须经过的边。求从<span class="math inline">\(s\)</span>出发，到每个<span class="math inline">\(i\)</span>结束并且经过所有必须经过边的最小长度。</li>
+<li><span class="math inline">\(n\leq 2500,m\leq \dfrac{n(n-1)}{2}\)</span></li>
+</ul>
+<hr />
+<h2 id="差分约束">差分约束</h2>
+<ul>
+<li>给定若干个不等式<span class="math inline">\(x_v\leq x_u+a\)</span>，求<span class="math inline">\(x_t-x_s\)</span>的最大值。</li>
+<li>对于一个不等式<span class="math inline">\(x_v\leq x_u+a\)</span>，可以在图上有<span class="math inline">\(u\)</span>向<span class="math inline">\(v\)</span>连一条长为<span class="math inline">\(a\)</span>的边。</li>
+<li>把不等式的解集问题变成了最短路问题。</li>
+</ul>
+<h3 id="负环">负环</h3>
+<ul>
+<li>有向图中边权和为负数的回路即为负环。</li>
+<li>当差分约束系统中出现负环时该方程组误解。</li>
+</ul>
+<h4 id="例题poj3169-layout">例题：poj3169 Layout</h4>
+<ul>
+<li>一共有<span class="math inline">\(n\)</span>头牛，有<span class="math inline">\(ml\)</span>个关系好的牛的信息，有<span class="math inline">\(md\)</span>个关系不好的牛的信息，关系好的牛之间不能查过某个距离，关系差的两头牛之间不能少于某个距离。求<span class="math inline">\(1\)</span>号牛和<span class="math inline">\(n\)</span>好牛的最大距离，如果距离无限大输出<span class="math inline">\(-2\)</span>，如果无解输出<span class="math inline">\(-1\)</span>。</li>
+<li>板题。</li>
+</ul>
+<h4 id="例题poj2109-intervals">例题：poj2109 Intervals</h4>
+<ul>
+<li>有<span class="math inline">\(n\)</span>个限制，每个限制有三个数<span class="math inline">\(a_i,b_i,c_i\)</span>组成，表示<span class="math inline">\([a_i,b_i]\)</span>中你至少需要选择<span class="math inline">\(c_i\)</span>个数。求最少需要选择的数的个数。</li>
+<li>前缀和差分约束。</li>
+</ul>
+<h4 id="例题xviii-open-cup-named-after-e.v.pankratiev.-gp-of-romania-gravity">例题：[XVIII Open Cup named after E.V.Pankratiev. Gp of Romania] Gravity</h4>
+<ul>
+<li>给你一个<span class="math inline">\(n\times m\)</span>的矩阵，每个位置为点或井号。点的位置为空，井号构成的四连通块会受重力向下掉落（不同四连通块不会连接在一起），直到无法掉落位置。求最后得到的矩阵。</li>
+<li><span class="math inline">\(n,m\leq 2000\)</span></li>
+<li>每个物体按列建立不等式，对其下落高度进行差分约束。</li>
+</ul>
+<hr />
+<h2 id="连通分量">连通分量</h2>
+<ul>
+<li>连通分量
+<ul>
+<li>图的极大连通子图。</li>
+</ul></li>
+<li>点双连通分量
+<ul>
+<li>图<span class="math inline">\(G\)</span>的极大连通子图<span class="math inline">\(G&#39;\)</span>，满足<span class="math inline">\(G&#39;\)</span>中任意两点之间都存在两条不在除端点之外相交的初级路径。</li>
+</ul></li>
+<li>边双连通分量
+<ul>
+<li>图<span class="math inline">\(G\)</span>的极大连通子图<span class="math inline">\(G&#39;\)</span>，满足<span class="math inline">\(G&#39;\)</span>中任意两点之间都存在两条没有公共边的简单路径。</li>
+</ul></li>
+<li>割点
+<ul>
+<li>对于图<span class="math inline">\(G\)</span>中的任意一个点<span class="math inline">\(v\)</span>，如果删去<span class="math inline">\(v\)</span>和与<span class="math inline">\(v\)</span>相邻的所有边，图的连通分量个数增加，则<span class="math inline">\(v\)</span>为图<span class="math inline">\(G\)</span>的一个割点。</li>
+</ul></li>
+<li>割边
+<ul>
+<li>对于图<span class="math inline">\(G\)</span>中的任意一个点边<span class="math inline">\(e\)</span>，如果删去<span class="math inline">\(e\)</span>，图的连通分量个数增加，则<span class="math inline">\(e\)</span>为图<span class="math inline">\(G\)</span>的一个割边。</li>
+</ul></li>
+<li>强连通分量
+<ul>
+<li>有向图<span class="math inline">\(G\)</span>的极大连通子图<span class="math inline">\(G&#39;\)</span>，满足<span class="math inline">\(G&#39;\)</span>中任意两点之间都存在一条道路。</li>
+</ul></li>
+</ul>
+<h3 id="tarjan求强连通分量">Tarjan（求强连通分量）</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">### Tarjan（求点双分量、割点）</span><br><span class="line"></span><br><span class="line">```cpp</span><br></pre></td></tr></table></figure>
+<h3 id="tarjan求边双分量割边">Tarjan（求边双分量、割边）</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="例题卖萌">例题：卖萌</h4>
+<ul>
+<li>给定一张带权无向图<span class="math inline">\(G\)</span>，再给定两个点<span class="math inline">\(S,T\)</span>，求每一条边山区后<span class="math inline">\(S\)</span>到<span class="math inline">\(T\)</span>的最短路是否会增加。</li>
+<li><span class="math inline">\(n\leq 40000,m\leq 2\times 10^5\)</span></li>
+</ul>
+<h4 id="例题网络流">例题：网络流</h4>
+<ul>
+<li>给定一张图<span class="math inline">\(G\)</span>，图中每条边的流量为<span class="math inline">\(1\)</span>。给定<span class="math inline">\(q\)</span>个询问，每个询问为加一条流量为<span class="math inline">\(1\)</span>的边后（询问各自独立），图中有多少个点对间的最大流为1.</li>
+<li><span class="math inline">\(n,q\leq 10^5,m\leq 5\times 10^5\)</span></li>
+</ul>
+<h3 id="传递闭包">传递闭包</h3>
+<ul>
+<li>步骤1：求强连通分量</li>
+<li>步骤2：缩点</li>
+<li>步骤3：再DAG上用bitset</li>
+</ul>
+<h4 id="例题matrix">例题：Matrix</h4>
+<ul>
+<li>给定一个<span class="math inline">\(n\times n\)</span>的实数矩阵<span class="math inline">\(A\)</span>，满足<span class="math inline">\(\forall i,A_{i,i}=0,\forall i \neq j,1\leq A_{i,j}&lt;1\)</span></li>
+<li>令<span class="math inline">\(E为单位矩阵，即\)</span>i,A_{i,i}=0,ij,A_{i,j}=0<span class="math inline">\(，求\)</span>E-A$的逆矩阵中有多少个位置不为<span class="math inline">\(0\)</span>，数据保证矩阵有逆。</li>
+<li><span class="math inline">\(n\leq 2000\)</span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day4/" rel="prev" title="FOI夏令营2021Day4">
+      <i class="fa fa-chevron-left"></i> FOI夏令营2021Day4
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day6/" rel="next" title="FOI夏令营2021Day6">
+      FOI夏令营2021Day6 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">图论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">回路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%9B%9E%E8%B7%AF"><span class="nav-number">1.1.1.</span> <span class="nav-text">欧拉回路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98poj1386-play-on-words"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">例题：poj1386 Play On Words</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E6%B7%B7%E5%90%88%E5%9B%BE%E7%9A%84%E6%AC%A7%E6%8B%89%E5%9B%9E%E8%B7%AF"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">例题：混合图的欧拉回路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%982020%E8%81%94%E5%90%88%E7%9C%81%E9%80%89-%E4%B8%81%E9%A6%99%E4%B9%8B%E8%B7%AF"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">例题：2020联合省选 丁香之路</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.2.</span> <span class="nav-text">差分约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9F%E7%8E%AF"><span class="nav-number">1.2.1.</span> <span class="nav-text">负环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98poj3169-layout"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">例题：poj3169 Layout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98poj2109-intervals"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">例题：poj2109 Intervals</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98xviii-open-cup-named-after-e.v.pankratiev.-gp-of-romania-gravity"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">例题：[XVIII Open Cup named after E.V.Pankratiev. Gp of Romania] Gravity</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="nav-number">1.3.</span> <span class="nav-text">连通分量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tarjan%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">Tarjan（求强连通分量）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tarjan%E6%B1%82%E8%BE%B9%E5%8F%8C%E5%88%86%E9%87%8F%E5%89%B2%E8%BE%B9"><span class="nav-number">1.3.2.</span> <span class="nav-text">Tarjan（求边双分量、割边）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E5%8D%96%E8%90%8C"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">例题：卖萌</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E7%BD%91%E7%BB%9C%E6%B5%81"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">例题：网络流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E9%80%92%E9%97%AD%E5%8C%85"><span class="nav-number">1.3.3.</span> <span class="nav-text">传递闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98matrix"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">例题：Matrix</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

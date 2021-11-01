@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Day2 字符串算法 林恺 字符串 hash 前置技能  快速幂 费马小定理 乘法逆元  什么是hash  hash是一种将字符串转化为数字的对应关系，用于加快字符串比较的速度。 冲突：一个字符串仅对应1个\(hash\)值，1个\(hash\)值可以对应很多字符串。  常见的hash方法  求一个串的hash值 \(hash(s)&#x3D;\sum{s_i}\times{b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FOI夏令营2021Day2">
+<meta property="og:url" content="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day2/index.html">
+<meta property="og:site_name" content="Phaero">
+<meta property="og:description" content="Day2 字符串算法 林恺 字符串 hash 前置技能  快速幂 费马小定理 乘法逆元  什么是hash  hash是一种将字符串转化为数字的对应关系，用于加快字符串比较的速度。 冲突：一个字符串仅对应1个\(hash\)值，1个\(hash\)值可以对应很多字符串。  常见的hash方法  求一个串的hash值 \(hash(s)&#x3D;\sum{s_i}\times{b">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-01T04:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-01T04:21:36.125Z">
+<meta property="article:tag" content="OI">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>FOI夏令营2021Day2 | Phaero</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Phaero" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Phaero</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phaero">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FOI夏令营2021Day2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-01 12:00:00" itemprop="dateCreated datePublished" datetime="2021-09-01T12:00:00+08:00">2021-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-01 12:21:36" itemprop="dateModified" datetime="2021-11-01T12:21:36+08:00">2021-11-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="day2-字符串算法-林恺">Day2 字符串算法 林恺</h1>
+<h2 id="字符串-hash">字符串 hash</h2>
+<h3 id="前置技能">前置技能</h3>
+<ul>
+<li>快速幂</li>
+<li>费马小定理</li>
+<li>乘法逆元</li>
+</ul>
+<h3 id="什么是hash">什么是hash</h3>
+<ul>
+<li>hash是一种将字符串转化为数字的对应关系，用于加快字符串比较的速度。</li>
+<li>冲突：一个字符串仅对应1个<span class="math inline">\(hash\)</span>值，1个<span class="math inline">\(hash\)</span>值可以对应很多字符串。</li>
+</ul>
+<h3 id="常见的hash方法">常见的hash方法</h3>
+<ul>
+<li>求一个串的hash值 <span class="math inline">\(hash(s)=\sum{s_i}\times{base^i} \,\,mod\,\,p\)</span></li>
+<li>求一个字串的hash值 <span class="math inline">\(hash_{l,r}=\dfrac{pre_r-pre_{l-1}}{base^{l-1}}\)</span></li>
+</ul>
+<h4 id="例题一个简单的习题1">例题：一个简单的习题1</h4>
+<ul>
+<li>给定两个由小写字母构成的字符串<span class="math inline">\(S,T\)</span>,问<span class="math inline">\(T\)</span>在<span class="math inline">\(S\)</span>中出现了多少次？</li>
+<li><span class="math inline">\(|S|,|T|\leq{10^6}\)</span></li>
+</ul>
+<h4 id="例题一个简单的习题2">例题：一个简单的习题2</h4>
+<ul>
+<li>给定一个字符串<span class="math inline">\(S\)</span>，请你求出其中有多少个不同的字串</li>
+<li><span class="math inline">\(|S|\leq{10^6}\)</span></li>
+</ul>
+<h4 id="例题一个简单的习题3">例题：一个简单的习题3</h4>
+<ul>
+<li>给定一个字符串<span class="math inline">\(S\)</span>，请你求出其中最长的回文串</li>
+<li><span class="math inline">\(|S|\leq{10^6}\)</span></li>
+<li>记录前后缀hash，枚举中心点，倍增二分半径</li>
+</ul>
+<h4 id="例题okr-a-horrible-poem">例题：OKR-A Horrible Poem</h4>
+<ul>
+<li>给定一个字符串<span class="math inline">\(S\)</span>，以及<span class="math inline">\(q\)</span>个询问，每个询问查询子区间<span class="math inline">\([l,r]\)</span>的最小循环节</li>
+<li><span class="math inline">\(|S|,q\leq{10^5}\)</span></li>
+<li><span class="math inline">\(O(\sqrt{n})\)</span>枚举循环节长度，<span class="math inline">\(O(1)\)</span>判断循环节从</li>
+</ul>
+<h2 id="trie">Trie</h2>
+<h4 id="例题first-g">例题：First! G</h4>
+<ul>
+<li>给定<span class="math inline">\(n\)</span>字符串<span class="math inline">\(s_i\)</span>，询问对于哪些字符串，可以通过重排字母表顺序的方式使其字典序最小</li>
+<li><span class="math inline">\(\sum^{n}_{i=1} |s_i|\leq 3\times 10^5\)</span></li>
+<li>对于每个<span class="math inline">\(s_i\)</span>，建立字符序小的字母指向字符序大的字母的有向图，最后判断图中有没有环。</li>
+</ul>
+<h4 id="例题reverse">例题：Reverse</h4>
+<ul>
+<li>给定<span class="math inline">\(n\)</span>个数<span class="math inline">\(a_i\)</span>，你需要完成以下两种操作共<span class="math inline">\(q\)</span>次。</li>
+<li>给定<span class="math inline">\(k\)</span>，对于所有比<span class="math inline">\(k\)</span>大的数，做“Selia翻转”。Selia翻转是指将<span class="math inline">\(k\)</span>与被反转的数写成二进制形式，找到他们最高的不同的为，反转低于改为的所有二进制位（0变成1，1变成0）</li>
+<li>询问值在<span class="math inline">\([l,r]\)</span>内的数有几个。</li>
+<li><span class="math inline">\(n,q\leq10^5,a_i\leq10^9\)</span></li>
+<li><span class="math inline">\(01Trie\)</span>树，在所有大于<span class="math inline">\(k\)</span>的子树的根节点打上反转的tag</li>
+</ul>
+<h2 id="kmp">KMP</h2>
+<p>（上课太紧凑，组织不出语言说明KMP） <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/solution/P3375">讲的比较好的别人的博客</a></p>
+<h4 id="引入例题">引入例题</h4>
+<ul>
+<li>给定两个由小写字母构成的字符串<span class="math inline">\(S,T\)</span>,问<span class="math inline">\(T\)</span>在<span class="math inline">\(S\)</span>中出现了多少次？</li>
+<li><span class="math inline">\(|S|,|T|\leq{10^6}\)</span></li>
+</ul>
+<h4 id="例题一道简单的题目">例题：一道简单的题目</h4>
+<ul>
+<li>给定一个字符串<span class="math inline">\(S\)</span>，你可以将这个字符串切成两部分，并交换这两部分的顺序。问有多少种方案可以得到原串。</li>
+<li><span class="math inline">\(|S|\leq 10^6\)</span></li>
+<li>把原串在复制一遍得到新串，作为文本串和原串作KMP</li>
+</ul>
+<h4 id="例题最小循环节">例题：最小循环节</h4>
+<ul>
+<li>给定字符串<span class="math inline">\(S\)</span>，你可以在<span class="math inline">\(S\)</span>末尾加上任意字符串<span class="math inline">\(T\)</span>，求<span class="math inline">\(S+T\)</span>的最小循环节。</li>
+<li><span class="math inline">\(|S|\leq 10^5\)</span></li>
+<li>本题：设字符串串长为<span class="math inline">\(n\)</span>，则其最小循环节长度为<span class="math inline">\(n-next_n\)</span></li>
+</ul>
+<h2 id="ac自动机">AC自动机</h2>
+<p>（上课太紧凑，组织不出语言说明AC自动机） <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/solution/P3808">讲的比较好的别人的博客</a></p>
+<h4 id="引入例题-1">引入例题</h4>
+<ul>
+<li>给定一个匹配串<span class="math inline">\(S\)</span>和<span class="math inline">\(n\)</span>个被匹配串<span class="math inline">\(T_i\)</span>，求有多少串<span class="math inline">\(T_i\)</span>是<span class="math inline">\(S\)</span>的字串。</li>
+<li><span class="math inline">\(|S|, \sum^{n}_{i=1} |T_i| \leq 10^5\)</span></li>
+</ul>
+<h4 id="例题文本生成器">例题：文本生成器</h4>
+<ul>
+<li>给定<span class="math inline">\(n\)</span>个字符串<span class="math inline">\(s_i\)</span>，求有多少长度为<span class="math inline">\(m\)</span>的字符串<span class="math inline">\(t\)</span>，满足<span class="math inline">\(t\)</span>中不存在任何一个字串<span class="math inline">\(s_i\)</span></li>
+<li><span class="math inline">\(n, m, |s_i|\leq 100\)</span></li>
+<li>在AC自动机上DP</li>
+</ul>
+<h4 id="例题一点数理知识">例题：一点数理知识</h4>
+<ul>
+<li>给定一个匹配串<span class="math inline">\(S\)</span>和<span class="math inline">\(n\)</span>个被匹配串<span class="math inline">\(T_i\)</span>，每个串<span class="math inline">\(T_i\)</span>在<span class="math inline">\(S\)</span>中出现了多少次。</li>
+<li><span class="math inline">\(|S|,\sum^{n}_{i=1} |T_i| \leq 10^5\)</span></li>
+</ul>
+<h2 id="manacher">Manacher</h2>
+<p>（上课太紧凑，组织不出语言说明Manacher） <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/solution/P3805">讲的比较好的别人的博客</a></p>
+<h4 id="引入例题-2">引入例题</h4>
+<ul>
+<li>给定一个字符串，请你求出其中最长的回文子串</li>
+<li><span class="math inline">\(|S|\leq10^6\)</span></li>
+</ul>
+<h4 id="最长双回文串">最长双回文串</h4>
+<ul>
+<li>定义双回文串为两个回文串依次拼接而成的串，求<span class="math inline">\(s\)</span>的最长双回文串。</li>
+<li><span class="math inline">\(|s|\leq 10^5\)</span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/01/FOI%E5%A4%8F%E4%BB%A4%E8%90%A52021Day3/" rel="next" title="FOI夏令营2021Day3">
+      FOI夏令营2021Day3 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#day2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95-%E6%9E%97%E6%81%BA"><span class="nav-number">1.</span> <span class="nav-text">Day2 字符串算法 林恺</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2-hash"><span class="nav-number">1.1.</span> <span class="nav-text">字符串 hash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E6%8A%80%E8%83%BD"><span class="nav-number">1.1.1.</span> <span class="nav-text">前置技能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFhash"><span class="nav-number">1.1.2.</span> <span class="nav-text">什么是hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84hash%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">常见的hash方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%B9%A0%E9%A2%981"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">例题：一个简单的习题1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%B9%A0%E9%A2%982"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">例题：一个简单的习题2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%B9%A0%E9%A2%983"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">例题：一个简单的习题3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98okr-a-horrible-poem"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">例题：OKR-A Horrible Poem</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trie"><span class="nav-number">1.2.</span> <span class="nav-text">Trie</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98first-g"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">例题：First! G</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98reverse"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">例题：Reverse</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kmp"><span class="nav-number">1.3.</span> <span class="nav-text">KMP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%8B%E9%A2%98"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">引入例题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E7%9A%84%E9%A2%98%E7%9B%AE"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">例题：一道简单的题目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E6%9C%80%E5%B0%8F%E5%BE%AA%E7%8E%AF%E8%8A%82"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">例题：最小循环节</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.4.</span> <span class="nav-text">AC自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%8B%E9%A2%98-1"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">引入例题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">例题：文本生成器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E7%82%B9%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86"><span class="nav-number">1.4.0.3.</span> <span class="nav-text">例题：一点数理知识</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#manacher"><span class="nav-number">1.5.</span> <span class="nav-text">Manacher</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%8B%E9%A2%98-2"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">引入例题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E5%8F%8C%E5%9B%9E%E6%96%87%E4%B8%B2"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">最长双回文串</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
