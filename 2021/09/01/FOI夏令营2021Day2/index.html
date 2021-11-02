@@ -28,7 +28,7 @@
 <meta property="og:description" content="Day2 字符串算法 林恺 字符串 hash 前置技能  快速幂 费马小定理 乘法逆元  什么是hash  hash是一种将字符串转化为数字的对应关系，用于加快字符串比较的速度。 冲突：一个字符串仅对应1个\(hash\)值，1个\(hash\)值可以对应很多字符串。  常见的hash方法  求一个串的hash值 \(hash(s)&#x3D;\sum{s_i}\times{b">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-01T04:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-01T04:21:36.125Z">
+<meta property="article:modified_time" content="2021-11-02T09:16:48.184Z">
 <meta property="article:tag" content="OI">
 <meta name="twitter:card" content="summary">
 
@@ -181,7 +181,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-01 12:21:36" itemprop="dateModified" datetime="2021-11-01T12:21:36+08:00">2021-11-01</time>
+                <time title="修改时间：2021-11-02 17:16:48" itemprop="dateModified" datetime="2021-11-02T17:16:48+08:00">2021-11-02</time>
               </span>
 
           
@@ -236,13 +236,13 @@
 <li><span class="math inline">\(O(\sqrt{n})\)</span>枚举循环节长度，<span class="math inline">\(O(1)\)</span>判断循环节从</li>
 </ul>
 <h2 id="trie">Trie</h2>
-<h4 id="例题first-g">例题：First! G</h4>
+<h3 id="例题first-g">例题：First! G</h3>
 <ul>
 <li>给定<span class="math inline">\(n\)</span>字符串<span class="math inline">\(s_i\)</span>，询问对于哪些字符串，可以通过重排字母表顺序的方式使其字典序最小</li>
 <li><span class="math inline">\(\sum^{n}_{i=1} |s_i|\leq 3\times 10^5\)</span></li>
 <li>对于每个<span class="math inline">\(s_i\)</span>，建立字符序小的字母指向字符序大的字母的有向图，最后判断图中有没有环。</li>
 </ul>
-<h4 id="例题reverse">例题：Reverse</h4>
+<h3 id="例题reverse">例题：Reverse</h3>
 <ul>
 <li>给定<span class="math inline">\(n\)</span>个数<span class="math inline">\(a_i\)</span>，你需要完成以下两种操作共<span class="math inline">\(q\)</span>次。</li>
 <li>给定<span class="math inline">\(k\)</span>，对于所有比<span class="math inline">\(k\)</span>大的数，做“Selia翻转”。Selia翻转是指将<span class="math inline">\(k\)</span>与被反转的数写成二进制形式，找到他们最高的不同的为，反转低于改为的所有二进制位（0变成1，1变成0）</li>
@@ -252,18 +252,18 @@
 </ul>
 <h2 id="kmp">KMP</h2>
 <p>（上课太紧凑，组织不出语言说明KMP） <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/solution/P3375">讲的比较好的别人的博客</a></p>
-<h4 id="引入例题">引入例题</h4>
+<h3 id="引入例题">引入例题</h3>
 <ul>
 <li>给定两个由小写字母构成的字符串<span class="math inline">\(S,T\)</span>,问<span class="math inline">\(T\)</span>在<span class="math inline">\(S\)</span>中出现了多少次？</li>
 <li><span class="math inline">\(|S|,|T|\leq{10^6}\)</span></li>
 </ul>
-<h4 id="例题一道简单的题目">例题：一道简单的题目</h4>
+<h3 id="例题一道简单的题目">例题：一道简单的题目</h3>
 <ul>
 <li>给定一个字符串<span class="math inline">\(S\)</span>，你可以将这个字符串切成两部分，并交换这两部分的顺序。问有多少种方案可以得到原串。</li>
 <li><span class="math inline">\(|S|\leq 10^6\)</span></li>
 <li>把原串在复制一遍得到新串，作为文本串和原串作KMP</li>
 </ul>
-<h4 id="例题最小循环节">例题：最小循环节</h4>
+<h3 id="例题最小循环节">例题：最小循环节</h3>
 <ul>
 <li>给定字符串<span class="math inline">\(S\)</span>，你可以在<span class="math inline">\(S\)</span>末尾加上任意字符串<span class="math inline">\(T\)</span>，求<span class="math inline">\(S+T\)</span>的最小循环节。</li>
 <li><span class="math inline">\(|S|\leq 10^5\)</span></li>
@@ -271,30 +271,30 @@
 </ul>
 <h2 id="ac自动机">AC自动机</h2>
 <p>（上课太紧凑，组织不出语言说明AC自动机） <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/solution/P3808">讲的比较好的别人的博客</a></p>
-<h4 id="引入例题-1">引入例题</h4>
+<h3 id="引入例题-1">引入例题</h3>
 <ul>
 <li>给定一个匹配串<span class="math inline">\(S\)</span>和<span class="math inline">\(n\)</span>个被匹配串<span class="math inline">\(T_i\)</span>，求有多少串<span class="math inline">\(T_i\)</span>是<span class="math inline">\(S\)</span>的字串。</li>
 <li><span class="math inline">\(|S|, \sum^{n}_{i=1} |T_i| \leq 10^5\)</span></li>
 </ul>
-<h4 id="例题文本生成器">例题：文本生成器</h4>
+<h3 id="例题文本生成器">例题：文本生成器</h3>
 <ul>
 <li>给定<span class="math inline">\(n\)</span>个字符串<span class="math inline">\(s_i\)</span>，求有多少长度为<span class="math inline">\(m\)</span>的字符串<span class="math inline">\(t\)</span>，满足<span class="math inline">\(t\)</span>中不存在任何一个字串<span class="math inline">\(s_i\)</span></li>
 <li><span class="math inline">\(n, m, |s_i|\leq 100\)</span></li>
 <li>在AC自动机上DP</li>
 </ul>
-<h4 id="例题一点数理知识">例题：一点数理知识</h4>
+<h3 id="例题一点数理知识">例题：一点数理知识</h3>
 <ul>
 <li>给定一个匹配串<span class="math inline">\(S\)</span>和<span class="math inline">\(n\)</span>个被匹配串<span class="math inline">\(T_i\)</span>，每个串<span class="math inline">\(T_i\)</span>在<span class="math inline">\(S\)</span>中出现了多少次。</li>
 <li><span class="math inline">\(|S|,\sum^{n}_{i=1} |T_i| \leq 10^5\)</span></li>
 </ul>
 <h2 id="manacher">Manacher</h2>
 <p>（上课太紧凑，组织不出语言说明Manacher） <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/solution/P3805">讲的比较好的别人的博客</a></p>
-<h4 id="引入例题-2">引入例题</h4>
+<h3 id="引入例题-2">引入例题</h3>
 <ul>
 <li>给定一个字符串，请你求出其中最长的回文子串</li>
 <li><span class="math inline">\(|S|\leq10^6\)</span></li>
 </ul>
-<h4 id="最长双回文串">最长双回文串</h4>
+<h3 id="最长双回文串">最长双回文串</h3>
 <ul>
 <li>定义双回文串为两个回文串依次拼接而成的串，求<span class="math inline">\(s\)</span>的最长双回文串。</li>
 <li><span class="math inline">\(|s|\leq 10^5\)</span></li>
@@ -379,7 +379,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#day2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95-%E6%9E%97%E6%81%BA"><span class="nav-number">1.</span> <span class="nav-text">Day2 字符串算法 林恺</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2-hash"><span class="nav-number">1.1.</span> <span class="nav-text">字符串 hash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E6%8A%80%E8%83%BD"><span class="nav-number">1.1.1.</span> <span class="nav-text">前置技能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFhash"><span class="nav-number">1.1.2.</span> <span class="nav-text">什么是hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84hash%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">常见的hash方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%B9%A0%E9%A2%981"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">例题：一个简单的习题1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%B9%A0%E9%A2%982"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">例题：一个简单的习题2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%B9%A0%E9%A2%983"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">例题：一个简单的习题3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98okr-a-horrible-poem"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">例题：OKR-A Horrible Poem</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trie"><span class="nav-number">1.2.</span> <span class="nav-text">Trie</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98first-g"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">例题：First! G</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98reverse"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">例题：Reverse</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kmp"><span class="nav-number">1.3.</span> <span class="nav-text">KMP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%8B%E9%A2%98"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">引入例题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E7%9A%84%E9%A2%98%E7%9B%AE"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">例题：一道简单的题目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E6%9C%80%E5%B0%8F%E5%BE%AA%E7%8E%AF%E8%8A%82"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">例题：最小循环节</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.4.</span> <span class="nav-text">AC自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%8B%E9%A2%98-1"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">引入例题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">例题：文本生成器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E7%82%B9%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86"><span class="nav-number">1.4.0.3.</span> <span class="nav-text">例题：一点数理知识</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#manacher"><span class="nav-number">1.5.</span> <span class="nav-text">Manacher</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%8B%E9%A2%98-2"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">引入例题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E5%8F%8C%E5%9B%9E%E6%96%87%E4%B8%B2"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">最长双回文串</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#day2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95-%E6%9E%97%E6%81%BA"><span class="nav-number">1.</span> <span class="nav-text">Day2 字符串算法 林恺</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2-hash"><span class="nav-number">1.1.</span> <span class="nav-text">字符串 hash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E6%8A%80%E8%83%BD"><span class="nav-number">1.1.1.</span> <span class="nav-text">前置技能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFhash"><span class="nav-number">1.1.2.</span> <span class="nav-text">什么是hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84hash%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">常见的hash方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%B9%A0%E9%A2%981"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">例题：一个简单的习题1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%B9%A0%E9%A2%982"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">例题：一个简单的习题2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%B9%A0%E9%A2%983"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">例题：一个简单的习题3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98okr-a-horrible-poem"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">例题：OKR-A Horrible Poem</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trie"><span class="nav-number">1.2.</span> <span class="nav-text">Trie</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98first-g"><span class="nav-number">1.2.1.</span> <span class="nav-text">例题：First! G</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98reverse"><span class="nav-number">1.2.2.</span> <span class="nav-text">例题：Reverse</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kmp"><span class="nav-number">1.3.</span> <span class="nav-text">KMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%8B%E9%A2%98"><span class="nav-number">1.3.1.</span> <span class="nav-text">引入例题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E7%9A%84%E9%A2%98%E7%9B%AE"><span class="nav-number">1.3.2.</span> <span class="nav-text">例题：一道简单的题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E6%9C%80%E5%B0%8F%E5%BE%AA%E7%8E%AF%E8%8A%82"><span class="nav-number">1.3.3.</span> <span class="nav-text">例题：最小循环节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ac%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.4.</span> <span class="nav-text">AC自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%8B%E9%A2%98-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">引入例题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.4.2.</span> <span class="nav-text">例题：文本生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E4%B8%80%E7%82%B9%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86"><span class="nav-number">1.4.3.</span> <span class="nav-text">例题：一点数理知识</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#manacher"><span class="nav-number">1.5.</span> <span class="nav-text">Manacher</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%8B%E9%A2%98-2"><span class="nav-number">1.5.1.</span> <span class="nav-text">引入例题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E5%8F%8C%E5%9B%9E%E6%96%87%E4%B8%B2"><span class="nav-number">1.5.2.</span> <span class="nav-text">最长双回文串</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
