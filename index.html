@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-01 12:24:15" itemprop="dateModified" datetime="2021-11-01T12:24:15+08:00">2021-11-01</time>
+                <time title="修改时间：2021-11-02 17:10:57" itemprop="dateModified" datetime="2021-11-02T17:10:57+08:00">2021-11-02</time>
               </span>
 
           
@@ -449,7 +449,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-01 12:23:30" itemprop="dateModified" datetime="2021-11-01T12:23:30+08:00">2021-11-01</time>
+                <time title="修改时间：2021-11-02 17:12:17" itemprop="dateModified" datetime="2021-11-02T17:12:17+08:00">2021-11-02</time>
               </span>
 
           
@@ -567,7 +567,9 @@
 </ul></li>
 </ul>
 <h3 id="tarjan求强连通分量">Tarjan（求强连通分量）</h3>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">### Tarjan（求点双分量、割点）</span><br><span class="line"></span><br><span class="line">```cpp</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="tarjan求点双分量割点">Tarjan（求点双分量、割点）</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 <h3 id="tarjan求边双分量割边">Tarjan（求边双分量、割边）</h3>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 <h4 id="例题卖萌">例题：卖萌</h4>
@@ -584,12 +586,12 @@
 <ul>
 <li>步骤1：求强连通分量</li>
 <li>步骤2：缩点</li>
-<li>步骤3：再DAG上用bitset</li>
+<li>步骤3：在DAG上用bitset</li>
 </ul>
 <h4 id="例题matrix">例题：Matrix</h4>
 <ul>
 <li>给定一个<span class="math inline">\(n\times n\)</span>的实数矩阵<span class="math inline">\(A\)</span>，满足<span class="math inline">\(\forall i,A_{i,i}=0,\forall i \neq j,1\leq A_{i,j}&lt;1\)</span></li>
-<li>令<span class="math inline">\(E为单位矩阵，即\)</span>i,A_{i,i}=0,ij,A_{i,j}=0<span class="math inline">\(，求\)</span>E-A$的逆矩阵中有多少个位置不为<span class="math inline">\(0\)</span>，数据保证矩阵有逆。</li>
+<li>令<span class="math inline">\(E\)</span>为单位矩阵，即<span class="math inline">\(\forall i,A_{i,i}=0,\forall i\neq j,A_{i,j}=0\)</span>，求<span class="math inline">\(E-A\)</span>的逆矩阵中有多少个位置不为<span class="math inline">\(0\)</span>，数据保证矩阵有逆。</li>
 <li><span class="math inline">\(n\leq 2000\)</span></li>
 </ul>
 
@@ -807,7 +809,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-01 12:21:43" itemprop="dateModified" datetime="2021-11-01T12:21:43+08:00">2021-11-01</time>
+                <time title="修改时间：2021-11-02 17:08:43" itemprop="dateModified" datetime="2021-11-02T17:08:43+08:00">2021-11-02</time>
               </span>
 
           
@@ -911,14 +913,14 @@ N=\dfrac{n!}{n_1!n_2!\cdots n_k!}=\binom{n}{n_1\,\,n_2\,\,\cdots\,\,n_k}
 <li>证明：分步选取，先放<span class="math inline">\(a_1\)</span>，有<span class="math inline">\(C(n,n_1)\)</span>种方法，再放<span class="math inline">\(a_2\)</span>有<span class="math inline">\(C(n-n_1-n_2,n_2)\)</span>种方法，<span class="math inline">\(\cdots\)</span>，放<span class="math inline">\(a_k\)</span>，有<span class="math inline">\(C(n-n_1-n_2-\cdots-n_{k-1},n_k)\)</span>种方法。</li>
 </ul>
 <p><span class="math display">\[
-N=C(n,n_1)C(n-n_1,n_2)\cdots C(n-n_1-n_2-\cdots-n_{k-1},n_k)\\=\dfrac{n!}{n_1!(n-n_1)!}\dfrac{(n-n_1)!}{n_2!(n-n_1-n_2)!}\cdots \dfrac{(n-n_1-\cdots-n_{k-1})!}{n_k!0!}=\dfrac{n!}{n_1!n_2!\cdots n_k!}
+N=C(n,n_1)C(n-n_1,n_2)\cdots C(n-n_1-n_2-\cdots-n_{k-1},n_k)\\=\dfrac{n!}{n_1!(n-n_1)!}\dfrac{(n-n_1)!}{n_2!(n-n_1-n_2)!}\cdots \dfrac{(n-n_1-\cdots-n_{k-1})!}{n_k!0!}\\=\dfrac{n!}{n_1!n_2!\cdots n_k!}
 \]</span></p>
 <ul>
 <li>若<span class="math inline">\(r\leq n_i\)</span>时，每个位置都有<span class="math inline">\(k\)</span>种选法，有<span class="math inline">\(N=k^r\)</span>。</li>
 </ul>
 <h3 id="多重集的组合">多重集的组合</h3>
 <ul>
-<li>多重集<span class="math inline">\(S=\{n_1a_1,n_2a_2,\cdots,n_ka_k\},0&lt;n_i\leq +\infin\)</span></li>
+<li>多重集<span class="math inline">\(S=\{n_1a_1,n_2a_2,\cdots,n_ka_k\},0&lt;n_i\leq +\infty\)</span></li>
 <li>当<span class="math inline">\(r\leq n_i\)</span>时，<span class="math inline">\(S\)</span>的<span class="math inline">\(r\)</span>组合数为</li>
 </ul>
 <p><span class="math display">\[
@@ -980,24 +982,27 @@ N=\dfrac{(r+k-1)!}{r!(k-1)!}=C(k+r-1,r)
 (1+x)^n=\sum^n_{k=0}\binom{n}{k}x^k=1+\sum^n_{k=1}\binom{n}{k}x^k
 \]</span></p>
 <p><span class="math display">\[
-Derivative: n(1+x)^{n-1}=\sum^n_{k=1}k\binom{n}{k}x^{k-1}\\
+Derivative: n(1+x)^{n-1}=\sum^n_{k=1}k\binom{n}{k}x^{k-1}
 \therefore n2^{n-1}=\sum^n_{k=1}k\binom{n}{k}=\sum^n_{k=0}k\binom{n}{k}
 \]</span></p>
 <ul>
 <li>证明公式7</li>
 </ul>
 <p><span class="math display">\[
-\sum^n_{k=0}\binom{n}{k}=\sum^n_{k=1}k^2\dfrac{n}{k}\binom{n-1}{k-1}\\
-=\sum^n_{k=1}kn\binom{n-1}{k-1}=n\sum^n_{k=1}[(k-1)+1]\binom{n-1}{k-1}\\
-=n\sum^n_{k=1}(k-1)\binom{n-1}{k-1}+n\sum^n_{k=1}\binom{n-1}{k-1}\\
-=n\sum^{n-1}_{k=0}k\binom{n-1}{k}+n2^{n-1}\\
-=n(n-1)2^{n-2}+n2^{n-1}=n(n+1)2^{n-2}
+\sum^n_{k=0}\binom{n}{k}=\sum^n_{k=1}k^2\dfrac{n}{k}\binom{n-1}{k-1}\\=\sum^n_{k=1}kn\binom{n-1}{k-1}=n\sum^n_{k=1}[(k-1)+1]\binom{n-1}{k-1}\\=n\sum^n_{k=1}(k-1)\binom{n-1}{k-1}+n\sum^n_{k=1}\binom{n-1}{k-1}\\=n\sum^{n-1}_{k=0}k\binom{n-1}{k}+n2^{n-1}\\=n(n-1)2^{n-2}+n2^{n-1}=n(n+1)2^{n-2}
 \]</span></p>
 <h3 id="恒等式求和变上项求和">恒等式求和——变上项求和</h3>
 <p><span class="math display">\[
 8.\sum^n_{l=0}\binom{l}{k}=\binom{n+1}{k+1},\,\,n,k\in N
 \]</span></p>
-<p>证明：组合分析。令<span class="math inline">\(S=\{a_1,a_2,\cdots,a_{n+1}\}\)</span>为<span class="math inline">\(n+1\)</span>元集合，等式右边式<span class="math inline">\(S\)</span>的<span class="math inline">\(k+1\)</span>子集数。考虑另一种分类计数的方法。将所有的<span class="math inline">\(k+1\)</span>元集合分成如下<span class="math inline">\(n+1\)</span>类： + 第<span class="math inline">\(1\)</span>类：含<span class="math inline">\(a_1\)</span>，剩下<span class="math inline">\(k\)</span>个元素取自<span class="math inline">\(\{a_2,\cdots,a_{n+1}\}\)</span>，有<span class="math inline">\(\binom{n}{k}\)</span>种. + 第<span class="math inline">\(2\)</span>类：不含<span class="math inline">\(a_1\)</span>，含<span class="math inline">\(a_2\)</span>，剩下<span class="math inline">\(k\)</span>个元素取自<span class="math inline">\(\{a_3,\cdots,a_{n+1}\}\)</span>，有<span class="math inline">\(\binom{n-1}{k}\)</span>种。 + <span class="math inline">\(\cdots\)</span> + 不含<span class="math inline">\(a_1,a_2,\cdots,a_n\)</span>，含<span class="math inline">\(a_{n+1}\)</span>,剩下<span class="math inline">\(k\)</span>个元素取自空集<span class="math inline">\(\binom{0}{k}\)</span>。 + 从而由加法原理得证。</p>
+<ul>
+<li>证明：组合分析。令<span class="math inline">\(S=\{a_1,a_2,\cdots,a_{n+1}\}\)</span>为<span class="math inline">\(n+1\)</span>元集合，等式右边式<span class="math inline">\(S\)</span>的<span class="math inline">\(k+1\)</span>子集数。考虑另一种分类计数的方法。将所有的<span class="math inline">\(k+1\)</span>元集合分成如下<span class="math inline">\(n+1\)</span>类：</li>
+<li>第<span class="math inline">\(1\)</span>类：含<span class="math inline">\(a_1\)</span>，剩下<span class="math inline">\(k\)</span>个元素取自<span class="math inline">\(\{a_2,\cdots,a_{n+1}\}\)</span>，有<span class="math inline">\(\binom{n}{k}\)</span>种.</li>
+<li>第<span class="math inline">\(2\)</span>类：不含<span class="math inline">\(a_1\)</span>，含<span class="math inline">\(a_2\)</span>，剩下<span class="math inline">\(k\)</span>个元素取自<span class="math inline">\(\{a_3,\cdots,a_{n+1}\}\)</span>，有<span class="math inline">\(\binom{n-1}{k}\)</span>种。</li>
+<li><span class="math inline">\(\cdots\)</span></li>
+<li>不含<span class="math inline">\(a_1,a_2,\cdots,a_n\)</span>，含<span class="math inline">\(a_{n+1}\)</span>,剩下<span class="math inline">\(k\)</span>个元素取自空集<span class="math inline">\(\binom{0}{k}\)</span>。</li>
+<li>从而由加法原理得证。</li>
+</ul>
 <h3 id="组合恒等式解题办法小结">组合恒等式解题办法小结</h3>
 <h4 id="证明方法">证明方法：</h4>
 <ul>
@@ -1005,7 +1010,10 @@ Derivative: n(1+x)^{n-1}=\sum^n_{k=1}k\binom{n}{k}x^{k-1}\\
 <li>二项式定理。</li>
 <li>幂函数的求导、积分。</li>
 <li>归纳法。</li>
-<li>组合分析。 #### 求和方法：</li>
+<li>组合分析。</li>
+</ul>
+<h4 id="求和方法">求和方法：</h4>
+<ul>
 <li>Pascal公式。</li>
 <li>级数求和。</li>
 <li>观察和的结果，用归纳法证明。</li>
@@ -1023,7 +1031,7 @@ Derivative: n(1+x)^{n-1}=\sum^n_{k=1}k\binom{n}{k}x^{k-1}\\
 <ul>
 <li>一个凸n边形用三角形剖分的方案数即为Catalan数<span class="math inline">\(h_n\)</span>。</li>
 </ul>
-<p><img src="1.png" /></p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/3862whby.png" /></p>
 <ul>
 <li>如图所示，以<span class="math inline">\(v_{n+1}v_1\)</span>为一条边的三角形<span class="math inline">\(v_{n+1}v_1v_k\)</span>将凸<span class="math inline">\(n+1\)</span>边形分割成两部分。 一部分是<span class="math inline">\(k\)</span>边形，另一部分是<span class="math inline">\(n-k-2\)</span>边形，<span class="math inline">\(k=2,3,\cdots,n\)</span>，即<span class="math inline">\(v_k\)</span>点可以是<span class="math inline">\(v_2,v_3,\cdots,v_n\)</span>点中任意一点。依据加法原理有：</li>
 </ul>
@@ -1044,8 +1052,10 @@ h_{n+1}=h_2h_n+h_3h_{n-1}+\cdots+h_{n-1}h_3+h_nh_2
 </ul>
 <p><span class="math display">\[
 h_{n+1}=\dfrac{1}{n}\binom{2n-2}{n-1}
-\]</span> ____________________ ## 同余</p>
-<h3 id="同余-1">同余</h3>
+\]</span></p>
+<hr />
+<h2 id="同余-1">同余</h2>
+<h3 id="同余-2">同余</h3>
 <ul>
 <li>定义：设<span class="math inline">\(m\)</span>是正整数，<span class="math inline">\(a\)</span>和<span class="math inline">\(b\)</span>是整数。如果<span class="math inline">\(m\mid a-b\)</span>，则称<span class="math inline">\(a\)</span>模<span class="math inline">\(m\)</span>同余于<span class="math inline">\(b\)</span>，或<span class="math inline">\(a\)</span>与<span class="math inline">\(b\)</span>模<span class="math inline">\(m\)</span>同余，记作</li>
 </ul>
@@ -1583,39 +1593,47 @@ f_u=\begin{cases}
 
 <script>
   if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
     window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
       }
     };
     (function () {
@@ -1630,7 +1648,6 @@ f_u=\begin{cases}
     MathJax.typeset();
   }
 </script>
-
     
 
   
